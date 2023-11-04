@@ -1,1 +1,4 @@
-# CS3300-Project2
+# StockShinobi
+
+
+
