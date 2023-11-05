@@ -1,10 +1,11 @@
 import React from 'react';
 import './assets/css/App.css';
 import logo from "./assets/images/logo.svg";
-import {BrowserRouter, RouteObject, useRoutes} from "react-router-dom";
+import {BrowserRouter, Route, RouteObject, Routes, useRoutes} from "react-router-dom";
 import LinksData from "./utils/Links"
 import Cookies from "universal-cookie";
 import Login from "./views/Login/Login";
+import Home from "./views/Home/Home";
 
 export const cookies: Cookies = new Cookies();
 
@@ -23,7 +24,16 @@ function App() {
 
   return (
       <BrowserRouter>
-          <Login></Login>
+          <Routes>
+              <Route
+                  path="/"
+                  element={<Login />}
+              />
+              <Route
+                  path="/home"
+                  element={<Home />}
+              />
+          </Routes>
       </BrowserRouter>
   );
 }

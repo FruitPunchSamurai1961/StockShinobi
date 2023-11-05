@@ -9,16 +9,20 @@ const Login = () => {
 
     const initVelocity = useRef(1);
     const transitVelocity = useRef(1.05);
+    const shouldAnimate = useRef(true);
 
     useEffect(() => {
-        const stars = new Stars({ initVelocity, transitVelocity });
-    }, [initVelocity, transitVelocity]);
+        const stars = new Stars({ initVelocity, transitVelocity, shouldAnimate });
+    }, [initVelocity, transitVelocity, shouldAnimate]);
 
     const stopAnimation = () => {
         setTimeout(() => {
             initVelocity.current = 0;
             transitVelocity.current = 0.99;
         }, 800);
+        setTimeout(() => {
+            shouldAnimate.current = false;
+        }, 2300);
     };
 
     const [loggedIn, setLoggedIn] = useState(false);
@@ -59,7 +63,7 @@ const Login = () => {
                     secure: true,
                     maxAge: 2592000
                 });
-                navigate("/query");
+                navigate("/home");
             } else {
                 setLoginStatus('Login failed');
             }
@@ -69,6 +73,7 @@ const Login = () => {
         } finally {
             setIsLoading(false);
         }
+        navigate("/home");
     };
 
     const [chart, setChart] = useState({

@@ -3,6 +3,7 @@ export const Stars = function(args) {
     var _scope = this;
 
     this.stars = [];
+    this.shouldAnimate = args.shouldAnimate;
     this.initVel = args.initVelocity;
     this.transitVel = args.transitVelocity;
     this.vel = args.vel || 1;
@@ -42,6 +43,10 @@ export const Stars = function(args) {
     }
 
     this.animate = function() {
+        if (!_scope.shouldAnimate.current) {
+            canvas.remove();
+            return;
+        }
         window.requestAnimationFrame(this.animate.bind(this));
         this.render();
     }
