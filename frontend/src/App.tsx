@@ -1,24 +1,30 @@
 import React from 'react';
 import './assets/css/App.css';
 import logo from "./assets/images/logo.svg";
+import {BrowserRouter, RouteObject, useRoutes} from "react-router-dom";
+import LinksData from "./utils/Links"
+import Cookies from "universal-cookie";
+import Login from "./views/Login/Login";
+
+export const cookies: Cookies = new Cookies();
+
 function App() {
+
+  // @ts-ignore
+  const routes: RouteObject[] = LinksData.map((data) => (
+      {id: data.name, path: data.path, Component: data.component}
+  ));
+
+  routes.push({
+        id: "HomePage-Login",
+        path: "/",
+        Component: Login
+  })
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <BrowserRouter>
+          <Login></Login>
+      </BrowserRouter>
   );
 }
 
