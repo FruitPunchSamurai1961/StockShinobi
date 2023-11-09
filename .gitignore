@@ -492,3 +492,5 @@ FodyWeavers.xsd
 *.sln.iml
 
 ./frontend/node_modules
+
+backend/.env
