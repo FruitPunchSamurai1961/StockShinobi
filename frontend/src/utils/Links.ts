@@ -1,5 +1,6 @@
 import Login from "../views/Login/Login";
 import {ReactElement} from "react";
+import Signup from "../views/Signup/Signup";
 
 
 type LinkData = {
@@ -13,6 +14,11 @@ const LinksData: LinkData[] = [
         name: "Login",
         path: "/login",
         component: Login
+    },
+    {
+        name: "Signup",
+        path: "/signup",
+        component: Signup
     }
 ]
 
