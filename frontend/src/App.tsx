@@ -17,7 +17,7 @@ function App() {
   ));
 
   routes.push({
-        id: "HomePage-Login",
+        id: "HomePage-Form",
         path: "/",
         Component: Login
   })

@@ -56,7 +56,7 @@ const Login = () => {
             });
 
             if (response.status === 200) {
-                setLoginStatus('Login successful');
+                setLoginStatus('Form successful');
                 const responseJson = await response.json();
                 const token = responseJson.accessToken;
                 cookies.set(ACCESS_TOKEN, token, {
@@ -65,7 +65,7 @@ const Login = () => {
                 });
                 navigate("/home");
             } else {
-                setLoginStatus('Login failed');
+                setLoginStatus('Form failed');
             }
         } catch (error) {
             console.error('Error:', error);
