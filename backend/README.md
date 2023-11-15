@@ -13,7 +13,7 @@ TODO
     2. `user.sql`
     3. `tokens.sql`
 4. Create a `.env` file containing your postgres url:
-    1. `DB_DSN="postgres://postgres:mysecretpassword@localhost:5432/stockShinobi_db?sslmode=disable"`
+    1. `DB_DSN="postgres://postgres:mysecretpassword@localhost:5432/stockshinobi_db?sslmode=disable"`
 5. Download all go dependencies via `go mod download`
 6. Start the server via `go run ./cmd/api`.
 7. Check out [useful commands](#useful-commands) for more info
