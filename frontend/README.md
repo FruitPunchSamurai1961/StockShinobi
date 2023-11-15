@@ -15,15 +15,17 @@ TODO
 │   ├───css
 │   └───images
 ├───components
-├───services
+├───redux
+├───ts
 ├───utils
 └───views
 ```
 
 ```
-assets: Static Files
+Assets: Static Files
 Components: Smaller Reusable Components
-Services: Vanilla JS Code
+Redux: Redux code to manage states and api calls
+Ts: stores all types, interfaces, and enums
 Utils: Helper Code for Frontend
 Views: Main Components that combine the /Components/* to render pages
 ```

@@ -1,9 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-
-// Define a type for the slice state
-interface SignupState {
-    showPassword: boolean
-}
+import {SignupState} from "../../ts/interfaces";
 
 // Define the initial state using that type
 const initialState: SignupState = {
