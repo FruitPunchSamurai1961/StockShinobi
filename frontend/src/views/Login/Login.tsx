@@ -1,6 +1,18 @@
-import {Box, Button, Flex, FormControl, FormLabel, Heading, Input, Stack, useColorModeValue,} from '@chakra-ui/react'
+import {
+    Box,
+    Button,
+    Checkbox,
+    Flex,
+    FormControl,
+    FormLabel,
+    Heading,
+    Input,
+    Stack,
+    Text,
+    useColorModeValue,
+} from '@chakra-ui/react'
 import {useLoginMutation} from "../../redux/api/authApi";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {setEmailState, setPasswordState} from "../../redux/login/loginSlice";
 
@@ -35,8 +47,8 @@ const Login = () => {
                     bg={useColorModeValue('white', 'gray.700')}
                     boxShadow={'lg'}
                     p={8}>
+                    <form onSubmit={handleSubmit}>
                     <Stack spacing={4}>
-                        <form onSubmit={handleSubmit}>
                             <FormControl id="email">
                                 <FormLabel>Email address</FormLabel>
                                 <Input type="email" value={loginState.email}
@@ -48,6 +60,13 @@ const Login = () => {
                                        onChange={(e) => dispatch(setPasswordState({newPasswordValue: e.target.value}))}/>
                             </FormControl>
                             <Stack spacing={10}>
+                                <Stack
+                                    direction={{ base: 'column', sm: 'row' }}
+                                    align={'start'}
+                                    justify={'space-between'}>
+                                    <Checkbox>Remember me</Checkbox>
+                                    <Text color={'blue.400'}><Link to={"/signup"}>New User?</Link></Text>
+                                </Stack>
                                 <Button
                                     bg={'blue.400'}
                                     color={'white'}
@@ -60,8 +79,8 @@ const Login = () => {
                                     Sign in
                                 </Button>
                             </Stack>
-                        </form>
                     </Stack>
+                    </form>
                 </Box>
             </Stack>
         </Flex>
