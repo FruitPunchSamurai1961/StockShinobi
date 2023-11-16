@@ -4,7 +4,8 @@
 TODO
 
 ## Installation
-TODO
+Command to install dependencies: `npm install --save --legacy-peer-deps`
+
 
 ## Usage
 TODO
@@ -17,6 +18,7 @@ TODO
 ├───components
 ├───redux
 ├───ts
+├───dev
 ├───utils
 └───views
 ```
@@ -28,6 +30,7 @@ Redux: Redux code to manage states and api calls
 Ts: stores all types, interfaces, and enums
 Utils: Helper Code for Frontend
 Views: Main Components that combine the /Components/* to render pages
+Dev: React Buddy code to help with development
 ```
 
 ## Available Scripts

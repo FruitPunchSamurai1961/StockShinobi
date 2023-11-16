@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './assets/css/index.css';
 import App from './App';
-import reportWebVitals from './components/webVitalsComponent/reportWebVitals';
+import reportWebVitals from './components/webVitals/reportWebVitals';
 import {Provider} from "react-redux";
 import {store} from "./redux/store";
 import {BrowserRouter as Router} from "react-router-dom";
-import {ChakraProvider} from "@chakra-ui/react";
+import {ChakraProvider, createStandaloneToast} from "@chakra-ui/react";
+import {DevSupport} from "@react-buddy/ide-toolbox";
+import {ComponentPreviews, useInitial} from "./dev";
 
 
 const root = ReactDOM.createRoot(

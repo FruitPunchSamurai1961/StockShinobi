@@ -1,6 +1,6 @@
 import React from 'react';
 import './assets/css/App.css';
-import LinksData from "./utils/Links"
+import LinksData from "./utils/links"
 import Login from "./views/Login/Login";
 import NotFound from "./views/NotFound";
 import {useRoutes} from "react-router-dom";
