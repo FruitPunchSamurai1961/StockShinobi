@@ -15,13 +15,20 @@ const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 
+export const {ToastContainer, toast} = createStandaloneToast()
+
 
 root.render(
     <React.StrictMode>
         <Provider store={store}>
             <ChakraProvider>
                 <Router>
-                    <App/>
+                    <DevSupport ComponentPreviews={ComponentPreviews}
+                                useInitialHook={useInitial}
+                    >
+                        <App/>
+                    </DevSupport>
+                    <ToastContainer/>
                 </Router>
             </ChakraProvider>
         </Provider>
