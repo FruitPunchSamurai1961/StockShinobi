@@ -1,7 +1,11 @@
 import {AuthenticationToken, User} from "./types";
 
 export interface SignupState {
-    showPassword: boolean
+    showPassword: boolean,
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string
 }
 
 export interface AuthState {
