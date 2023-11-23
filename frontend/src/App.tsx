@@ -5,8 +5,6 @@ import {store} from "./redux/store";
 import {ChakraProvider, createStandaloneToast} from "@chakra-ui/react";
 import {AuthProvider} from "./components/context/AuthContext";
 import {RouterProvider} from "react-router-dom";
-import {DevSupport} from "@react-buddy/ide-toolbox";
-import {ComponentPreviews, useInitial} from "./dev";
 import {router} from "./components/routes/Router";
 
 
@@ -18,9 +16,7 @@ function App() {
             <Provider store={store}>
                 <ChakraProvider>
                     <AuthProvider>
-                        <DevSupport ComponentPreviews={ComponentPreviews} useInitialHook={useInitial}>
-                            <RouterProvider router={router}/>
-                        </DevSupport>
+                        <RouterProvider router={router}/>
                         <ToastContainer/>
                     </AuthProvider>
                 </ChakraProvider>
