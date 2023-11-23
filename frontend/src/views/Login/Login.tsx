@@ -15,12 +15,16 @@ import {useLoginMutation} from "../../redux/api/authApi";
 import {Link, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {setEmailState, setPasswordState} from "../../redux/login/loginSlice";
+import {AuthContext} from "../../components/context/AuthContext";
+import {useContext} from "react";
 
 const Login = () => {
     const [login, {isLoading}] = useLoginMutation();
     const navigate = useNavigate();
     const loginState = useAppSelector((state) => state.login);
     const dispatch = useAppDispatch();
+    const {handleLogin} = useContext(AuthContext);
+
 
     const handleSubmit = async (event: any) => {
         event.preventDefault();
@@ -28,7 +32,10 @@ const Login = () => {
             email: loginState.email,
             password: loginState.password
         }).unwrap()
-            .then(() => navigate("/home"))
+            .then((result) => {
+                handleLogin(result.authentication_token.token);
+                navigate("/");
+            })
             .catch(error => console.error(error));
     }
 
@@ -48,7 +55,7 @@ const Login = () => {
                     boxShadow={'lg'}
                     p={8}>
                     <form onSubmit={handleSubmit}>
-                    <Stack spacing={4}>
+                        <Stack spacing={4}>
                             <FormControl id="email">
                                 <FormLabel>Email address</FormLabel>
                                 <Input type="email" value={loginState.email}
@@ -61,7 +68,7 @@ const Login = () => {
                             </FormControl>
                             <Stack spacing={10}>
                                 <Stack
-                                    direction={{ base: 'column', sm: 'row' }}
+                                    direction={{base: 'column', sm: 'row'}}
                                     align={'start'}
                                     justify={'space-between'}>
                                     <Checkbox>Remember me</Checkbox>
@@ -79,7 +86,7 @@ const Login = () => {
                                     Sign in
                                 </Button>
                             </Stack>
-                    </Stack>
+                        </Stack>
                     </form>
                 </Box>
             </Stack>

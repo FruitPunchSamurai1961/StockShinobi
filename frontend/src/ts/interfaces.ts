@@ -8,14 +8,18 @@ export interface SignupState {
     lastName: string
 }
 
-export interface AuthState {
+export interface UserState {
     user: User | undefined
-    authentication_token: AuthenticationToken | undefined
 }
 
 export interface LoginState {
     email: string
     password: string
+}
+
+export interface ContextState {
+    isLoggedIn: boolean
+    token: string
 }
 
 
