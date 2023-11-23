@@ -1,10 +1,9 @@
 import {store} from "../redux/store";
-import {ReactElement} from "react";
-import {ToastPosition} from "@chakra-ui/react";
+import {ContextState} from "./interfaces";
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
-export type ToastStatusOptions =  "info" | "warning" | "success" | "error" | "loading" | undefined;
+export type ToastStatusOptions = "info" | "warning" | "success" | "error" | "loading" | undefined;
 
 
 export type User = {
@@ -19,8 +18,8 @@ export type AuthenticationToken = {
     expiry: Date
 }
 
-export type LinkData = {
-    name: String;
-    path: String;
-    component: () => ReactElement;
+export type AuthContextType = {
+    contextState: ContextState,
+    handleLogin: (token: string) => void,
+    handleLogout: () => void
 }

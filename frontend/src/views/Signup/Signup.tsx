@@ -25,7 +25,7 @@ import {
     setShowPasswordState
 } from "../../redux/signup/signupSlice";
 import {useSignupMutation} from "../../redux/api/authApi";
-import {toast} from "../../index";
+import {toast} from "../../App";
 
 const Signup = () => {
     const signupState = useAppSelector((state) => state.signup);

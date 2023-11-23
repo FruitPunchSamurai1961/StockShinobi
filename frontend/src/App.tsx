@@ -1,34 +1,31 @@
 import React from 'react';
 import './assets/css/App.css';
-import LinksData from "./utils/links"
-import Login from "./views/Login/Login";
-import NotFound from "./views/NotFound";
-import {useRoutes} from "react-router-dom";
+import {Provider} from "react-redux";
+import {store} from "./redux/store";
+import {ChakraProvider, createStandaloneToast} from "@chakra-ui/react";
+import {AuthProvider} from "./components/context/AuthContext";
+import {RouterProvider} from "react-router-dom";
+import {DevSupport} from "@react-buddy/ide-toolbox";
+import {ComponentPreviews, useInitial} from "./dev";
+import {router} from "./components/routes/Router";
 
+
+export const {ToastContainer, toast} = createStandaloneToast()
 
 function App() {
-
-    // @ts-ignore
-    const routes: RouteObject[] = LinksData.map((data) => (
-        {id: data.name, path: data.path, Component: data.component}
-    ));
-
-    routes.push({
-            id: "HomePage-Login",
-            path: "/",
-            Component: Login
-        },
-        {
-            id: "NotFound",
-            path: "*",
-            Component: NotFound
-        })
-
     return (
-        <div>
-            {useRoutes(routes)}
-        </div>
-    );
+        <React.StrictMode>
+            <Provider store={store}>
+                <ChakraProvider>
+                    <AuthProvider>
+                        <DevSupport ComponentPreviews={ComponentPreviews} useInitialHook={useInitial}>
+                            <RouterProvider router={router}/>
+                        </DevSupport>
+                        <ToastContainer/>
+                    </AuthProvider>
+                </ChakraProvider>
+            </Provider>
+        </React.StrictMode>);
 }
 
 export default App;

@@ -1,16 +1,15 @@
 import type {PayloadAction} from '@reduxjs/toolkit'
 import {createSlice} from '@reduxjs/toolkit'
 import {AuthenticationToken, RootState, User} from "../../ts/types";
-import {AuthState} from "../../ts/interfaces";
+import {UserState} from "../../ts/interfaces";
 import {login, signup} from "../api/authApi";
 
-const initialState: AuthState = {
+const initialState: UserState = {
     user: undefined,
-    authentication_token: undefined
 }
 
-const authSlice = createSlice({
-    name: 'auth',
+const userSlice = createSlice({
+    name: 'user',
     initialState,
     reducers: {
         logout: () => initialState,
@@ -20,7 +19,6 @@ const authSlice = createSlice({
             authentication_token: AuthenticationToken,
             user: User
         }>) => {
-            state.authentication_token = authentication_token;
             state.user = user;
         });
         builder.addMatcher(signup.matchFulfilled, (state, {payload: {user}}: PayloadAction<{
@@ -31,10 +29,9 @@ const authSlice = createSlice({
     },
 });
 
-export const {logout} = authSlice.actions
+export const {logout} = userSlice.actions
 
 
-export const selectCurrentUser = (state: RootState) => state.auth.user;
-export const selectUserToken = (state: RootState) => state.auth.authentication_token;
+export const selectCurrentUser = (state: RootState) => state.user.user;
 
-export const authReducer = authSlice.reducer;
+export const userReducer = userSlice.reducer;
