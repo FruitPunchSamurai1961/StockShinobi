@@ -13,12 +13,13 @@ export const router = createBrowserRouter([{
     errorElement: <NotFound/>,
     children: [
         {index: true, element: <Index/>},
-        {path: "home", element: <Home/>},
         {path: "login", element: <Login/>},
         {path: "signup", element: <Signup/>},
         {
             element: <ProtectedRoute/>,
-            children: []
+            children: [
+                {path: "home", element: <Home/>},
+            ]
         }
     ]
 }]);
