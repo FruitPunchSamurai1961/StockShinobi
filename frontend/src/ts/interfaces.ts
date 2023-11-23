@@ -18,6 +18,7 @@ export interface LoginState {
 }
 
 export interface ContextState {
+    isLoading: boolean
     isLoggedIn: boolean
     token: string
 }
