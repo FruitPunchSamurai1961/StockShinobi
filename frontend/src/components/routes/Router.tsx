@@ -5,12 +5,14 @@ import Signup from "../../views/Signup/Signup";
 import ProtectedRoute from "./ProtectedRoute";
 import Root from "./Root";
 import NotFound from "./NotFound";
+import Index from "./Index";
 
 export const router = createBrowserRouter([{
     path: "/",
     element: <Root/>,
     errorElement: <NotFound/>,
     children: [
+        {index: true, element: <Index/>},
         {path: "home", element: <Home/>},
         {path: "login", element: <Login/>},
         {path: "signup", element: <Signup/>},
