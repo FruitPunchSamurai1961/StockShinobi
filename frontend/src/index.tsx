@@ -3,36 +3,15 @@ import ReactDOM from 'react-dom/client';
 import './assets/css/index.css';
 import App from './App';
 import reportWebVitals from './components/webVitals/reportWebVitals';
-import {Provider} from "react-redux";
-import {store} from "./redux/store";
-import {BrowserRouter as Router} from "react-router-dom";
-import {ChakraProvider, createStandaloneToast} from "@chakra-ui/react";
-import {DevSupport} from "@react-buddy/ide-toolbox";
-import {ComponentPreviews, useInitial} from "./dev";
 
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 
-export const {ToastContainer, toast} = createStandaloneToast()
-
 
 root.render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <ChakraProvider>
-                <Router>
-                    <DevSupport ComponentPreviews={ComponentPreviews}
-                                useInitialHook={useInitial}
-                    >
-                        <App/>
-                    </DevSupport>
-                    <ToastContainer/>
-                </Router>
-            </ChakraProvider>
-        </Provider>
-    </React.StrictMode>
+    <App/>
 );
 
 // If you want to start measuring performance in your app, pass a function

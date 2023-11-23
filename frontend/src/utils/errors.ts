@@ -1,5 +1,5 @@
-import {toast} from "../index";
 import {ToastStatusOptions} from "../ts/types";
+import {toast} from "../App";
 
 
 const commonToastProperties = {
