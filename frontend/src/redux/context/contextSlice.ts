@@ -4,28 +4,34 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 const initialState: ContextState = {
     token: "",
-    isLoggedIn: false
+    isLoggedIn: false,
+    isLoading: true
 }
 
 export const contextSlice = createSlice({
     name: "context",
     initialState: initialState,
     reducers: {
-        setIsLoggedInState: (
-            state,
-            {payload: {newIsLoggedInValue}}: PayloadAction<{ newIsLoggedInValue: boolean }>
-        ) => {
-            state.isLoggedIn = newIsLoggedInValue;
+        logout: (state) => {
+            state.token = "";
+            state.isLoggedIn = false
         },
-        setTokenState: (
+        setIsLoadingState: (
+            state,
+            {payload: {newIsLoadingValue}}: PayloadAction<{ newIsLoadingValue: boolean }>
+        ) => {
+            state.isLoading = newIsLoadingValue;
+        },
+        login: (
             state,
             {payload: {newTokenValue}}: PayloadAction<{ newTokenValue: string }>
         ) => {
             state.token = newTokenValue;
+            state.isLoggedIn = true;
         },
     }
 });
 
-export const {setIsLoggedInState, setTokenState} = contextSlice.actions;
+export const {logout, login, setIsLoadingState} = contextSlice.actions;
 
 export const contextReducer = contextSlice.reducer;

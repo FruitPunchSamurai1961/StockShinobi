@@ -11,6 +11,7 @@ export const loginSlice = createSlice({
     name: "login",
     initialState: initialState,
     reducers: {
+        logout: () => initialState,
         setEmailState: (
             state,
             {payload: {newEmailValue}}: PayloadAction<{ newEmailValue: string }>
@@ -26,7 +27,7 @@ export const loginSlice = createSlice({
     }
 })
 
-export const {setEmailState, setPasswordState} = loginSlice.actions;
+export const {setEmailState, setPasswordState, logout} = loginSlice.actions;
 
 export const loginReducer = loginSlice.reducer;
 
