@@ -23,9 +23,10 @@ const version = "1.0.0"
 var buildTime string
 
 type config struct {
-	port int
-	env  string
-	db   struct {
+	port   int
+	env    string
+	apiKey string
+	db     struct {
 		dsn          string
 		maxOpenConns int
 		maxIdleConns int
@@ -58,6 +59,7 @@ func main() {
 
 	flag.IntVar(&cfg.port, "port", 4000, "API server port")
 	flag.StringVar(&cfg.env, "env", "development", "Environment (development|staging|production)")
+	flag.StringVar(&cfg.apiKey, "api-key", os.Getenv("AV_API_KEY"), "Alphavantage api key")
 
 	flag.StringVar(&cfg.db.dsn, "db-dsn", os.Getenv("DB_DSN"), "PostgresSQL DSN")
 	flag.IntVar(&cfg.db.maxOpenConns, "db-max-open-conns", 25, "PostgresSQL max open connections")
