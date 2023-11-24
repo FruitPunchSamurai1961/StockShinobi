@@ -33,6 +33,10 @@ type password struct {
 	hash      []byte
 }
 
+func (u *User) IsAnonymous() bool {
+	return u == AnonymousUser
+}
+
 func (p *password) Set(plainTextPassword string) error {
 	hash, err := bcrypt.GenerateFromPassword([]byte(plainTextPassword), 12)
 	if err != nil {
@@ -172,7 +176,7 @@ func (m UserModel) GetForToken(tokenPlaintext string) (*User, error) {
 		INNER JOIN tokens
 		ON users.id = tokens.user_id
 		WHERE tokens.hash = $1
-		AND tokens.expiry > $3
+		AND tokens.expiry > $2
 	`
 
 	args := []any{tokenHash[:], time.Now()}

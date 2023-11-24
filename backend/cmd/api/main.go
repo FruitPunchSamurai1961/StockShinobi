@@ -8,6 +8,7 @@ import (
 	"expvar"
 	"flag"
 	"fmt"
+	goalphavantage "github.com/FruitPunchSamurai1961/Go-AlphaVantage"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 	"log"
@@ -43,10 +44,11 @@ type config struct {
 	}
 }
 type application struct {
-	config config
-	logger *jsonlog.Logger
-	models data.Models
-	wg     sync.WaitGroup
+	config    config
+	logger    *jsonlog.Logger
+	models    data.Models
+	apiClient *goalphavantage.Client
+	wg        sync.WaitGroup
 }
 
 func main() {
@@ -111,9 +113,10 @@ func main() {
 	}))
 
 	app := &application{
-		config: cfg,
-		logger: logger,
-		models: data.NewModels(db),
+		config:    cfg,
+		logger:    logger,
+		models:    data.NewModels(db),
+		apiClient: goalphavantage.NewClient(cfg.apiKey),
 	}
 
 	err = app.serve()
