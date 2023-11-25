@@ -2,9 +2,8 @@ package main
 
 import (
 	"expvar"
-	"net/http"
-
 	"github.com/julienschmidt/httprouter"
+	"net/http"
 )
 
 func (app *application) routes() http.Handler {
@@ -17,6 +16,8 @@ func (app *application) routes() http.Handler {
 
 	router.HandlerFunc(http.MethodPost, "/v1/users", app.registerUserHandler)
 	router.HandlerFunc(http.MethodPost, "/v1/tokens/authentication", app.createAuthenticationTokenHandler)
+
+	router.HandlerFunc(http.MethodGet, "/v1/stocks/list", app.requireAuthenticatedUser(app.activeStocksListHandler))
 
 	router.Handler(http.MethodGet, "/debug/vars", expvar.Handler())
 
