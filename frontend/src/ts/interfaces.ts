@@ -1,4 +1,4 @@
-import {AuthenticationToken, User} from "./types";
+import {AuthenticationToken, TopStock, User} from "./types";
 
 export interface SignupState {
     showPassword: boolean,
@@ -31,4 +31,9 @@ export interface LoginResponse {
 
 export interface SignupResponse {
     user: User
+}
+
+export interface TopStockListProps {
+    title: string,
+    stocks: TopStock[]
 }

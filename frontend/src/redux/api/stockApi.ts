@@ -1,6 +1,7 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {apiUrl} from "../../utils/authConstants";
 import {ActiveStock, RootState} from "../../ts/types";
+import {requestMethod} from "../../ts/enums";
 
 
 export const stockApi = createApi({
@@ -18,7 +19,10 @@ export const stockApi = createApi({
     }),
     endpoints: (builder) => ({
         getActiveStocksList: builder.query<ActiveStock[], void>({
-            query: () => `/list`,
+            query: () => ({
+                url: `/list`,
+                method: requestMethod.GET,
+            }),
         })
     })
 });
