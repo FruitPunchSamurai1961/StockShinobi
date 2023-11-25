@@ -34,7 +34,7 @@ const AuthProvider = ({children}: { children: React.ReactNode }) => {
             dispatch(contextSliceLogin({newTokenValue: storedAuthToken}));
         }
         dispatch(setIsLoadingState({newIsLoadingValue: false}));
-    }, [])
+    }, [dispatch])
 
     const handleLogin = (token: string) => {
         dispatch(contextSliceLogin({newTokenValue: token}));

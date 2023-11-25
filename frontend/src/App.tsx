@@ -12,16 +12,15 @@ export const {ToastContainer, toast} = createStandaloneToast()
 
 function App() {
     return (
-        <React.StrictMode>
-            <Provider store={store}>
-                <ChakraProvider>
-                    <AuthProvider>
-                        <RouterProvider router={router}/>
-                        <ToastContainer/>
-                    </AuthProvider>
-                </ChakraProvider>
-            </Provider>
-        </React.StrictMode>);
+        <Provider store={store}>
+            <ChakraProvider>
+                <AuthProvider>
+                    <RouterProvider router={router}/>
+                    <ToastContainer/>
+                </AuthProvider>
+            </ChakraProvider>
+        </Provider>
+    );
 }
 
 export default App;
