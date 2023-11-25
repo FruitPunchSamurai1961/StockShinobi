@@ -18,6 +18,22 @@ export type AuthenticationToken = {
     expiry: Date
 }
 
+export type ActiveStock = {
+    Symbol: string,
+    Name: string,
+    Exchange: string,
+    AssetType: string
+}
+
+export type TopStock = {
+    ticker: string;
+    price: number;
+    change_amount: number;
+    change_percentage: number;
+    volume: number;
+}
+
+
 export type AuthContextType = {
     contextState: ContextState,
     handleLogin: (token: string) => void,

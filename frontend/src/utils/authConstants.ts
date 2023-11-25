@@ -6,5 +6,3 @@ export const PRODUCTION_API_BASE_URL = '';
 export const apiUrl = process.env.NODE_ENV === "development" ? DEVELOPMENT_API_BASE_URL : PRODUCTION_API_BASE_URL;
 
 export const LOCAL_STORAGE_AUTH_TOKEN_KEY = "AUTHENTICATION_TOKEN"
-export const REFRESH_TOKEN = 'REFRESH_TOKEN';
-export const CAPTCHA_TOKEN = 'CAPTCHA_TOKEN';
