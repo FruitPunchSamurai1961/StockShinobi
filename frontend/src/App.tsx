@@ -9,7 +9,6 @@ import {router} from "./components/routes/Router";
 
 
 export const {ToastContainer, toast} = createStandaloneToast()
-
 function App() {
     return (
         <Provider store={store}>
