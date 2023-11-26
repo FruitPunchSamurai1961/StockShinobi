@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Container, FormControl, FormLabel, Text, useColorMode} from '@chakra-ui/react';
 import {Select} from "chakra-react-select";
-import {useSearchMutation, useSignupMutation} from "../../redux/api/authApi";
 
 const SearchBar = () => {
     const {colorMode} = useColorMode();
