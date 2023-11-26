@@ -8,7 +8,7 @@ import (
 	"expvar"
 	"flag"
 	"fmt"
-	goalphavantage "github.com/FruitPunchSamurai1961/Go-AlphaVantage"
+	"github.com/FruitPunchSamurai1961/goalphavantage"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 	"log"

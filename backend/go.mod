@@ -3,7 +3,7 @@ module StockShinobi.FruitPunchSamurai1961.net
 go 1.21.1
 
 require (
-	github.com/FruitPunchSamurai1961/Go-AlphaVantage v0.0.0-20231124045028-3f0f0a09529c
+	github.com/FruitPunchSamurai1961/goalphavantage v0.0.3
 	github.com/felixge/httpsnoop v1.0.4
 	github.com/joho/godotenv v1.5.1
 	github.com/julienschmidt/httprouter v1.3.0
@@ -12,5 +12,3 @@ require (
 	golang.org/x/crypto v0.15.0
 	golang.org/x/time v0.4.0
 )
-
-require github.com/stretchr/testify v1.8.4 // indirect

@@ -18,6 +18,8 @@ func (app *application) routes() http.Handler {
 	router.HandlerFunc(http.MethodPost, "/v1/tokens/authentication", app.createAuthenticationTokenHandler)
 
 	router.HandlerFunc(http.MethodGet, "/v1/stocks/list", app.requireAuthenticatedUser(app.activeStocksListHandler))
+	router.HandlerFunc(http.MethodGet, "/v1/stocks/news", app.requireAuthenticatedUser(app.newsSentimentHandler))
+	router.HandlerFunc(http.MethodGet, "/v1/stocks/ranking", app.requireAuthenticatedUser(app.topStocksHandler))
 
 	router.Handler(http.MethodGet, "/debug/vars", expvar.Handler())
 
