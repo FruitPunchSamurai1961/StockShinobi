@@ -1,71 +1,48 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Container, FormControl, FormLabel, Text, useColorMode} from '@chakra-ui/react';
 import {Select} from "chakra-react-select";
+import {useSearchMutation, useSignupMutation} from "../../redux/api/authApi";
 
 const SearchBar = () => {
     const {colorMode} = useColorMode();
-    
-    const stateOptions = [
-        {value: "AL", label: "Alabama"},
-        {value: "AK", label: "Alaska"},
-        {value: "AS", label: "American Samoa"},
-        {value: "AZ", label: "Arizona"},
-        {value: "AR", label: "Arkansas"},
-        {value: "CA", label: "California"},
-        {value: "CO", label: "Colorado"},
-        {value: "CT", label: "Connecticut"},
-        {value: "DE", label: "Delaware"},
-        {value: "DC", label: "District Of Columbia"},
-        {value: "FM", label: "Federated States Of Micronesia"},
-        {value: "FL", label: "Florida"},
-        {value: "GA", label: "Georgia"},
-        {value: "GU", label: "Guam"},
-        {value: "HI", label: "Hawaii"},
-        {value: "ID", label: "Idaho"},
-        {value: "IL", label: "Illinois"},
-        {value: "IN", label: "Indiana"},
-        {value: "IA", label: "Iowa"},
-        {value: "KS", label: "Kansas"},
-        {value: "KY", label: "Kentucky"},
-        {value: "LA", label: "Louisiana"},
-        {value: "ME", label: "Maine"},
-        {value: "MH", label: "Marshall Islands"},
-        {value: "MD", label: "Maryland"},
-        {value: "MA", label: "Massachusetts"},
-        {value: "MI", label: "Michigan"},
-        {value: "MN", label: "Minnesota"},
-        {value: "MS", label: "Mississippi"},
-        {value: "MO", label: "Missouri"},
-        {value: "MT", label: "Montana"},
-        {value: "NE", label: "Nebraska"},
-        {value: "NV", label: "Nevada"},
-        {value: "NH", label: "New Hampshire"},
-        {value: "NJ", label: "New Jersey"},
-        {value: "NM", label: "New Mexico"},
-        {value: "NY", label: "New York"},
-        {value: "NC", label: "North Carolina"},
-        {value: "ND", label: "North Dakota"},
-        {value: "MP", label: "Northern Mariana Islands"},
-        {value: "OH", label: "Ohio"},
-        {value: "OK", label: "Oklahoma"},
-        {value: "OR", label: "Oregon"},
-        {value: "PW", label: "Palau"},
-        {value: "PA", label: "Pennsylvania"},
-        {value: "PR", label: "Puerto Rico"},
-        {value: "RI", label: "Rhode Island"},
-        {value: "SC", label: "South Carolina"},
-        {value: "SD", label: "South Dakota"},
-        {value: "TN", label: "Tennessee"},
-        {value: "TX", label: "Texas"},
-        {value: "UT", label: "Utah"},
-        {value: "VT", label: "Vermont"},
-        {value: "VI", label: "Virgin Islands"},
-        {value: "VA", label: "Virginia"},
-        {value: "WA", label: "Washington"},
-        {value: "WV", label: "West Virginia"},
-        {value: "WI", label: "Wisconsin"},
-        {value: "WY", label: "Wyoming"}
-    ];
+
+    const [search, setSearch] = useState('AAPL');
+    const [ticker, setTicker] = useState('');
+    const [tickerResults, setTickerResults] = useState<any[]>([]);
+
+    useEffect(() => {
+        const getSymbol = async (search: string) => {
+            try {
+                const response = await fetch(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=` + search + '&apikey=' + '2H26FC7FC12UM05I', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                if (response.status === 200) {
+                    const result = await response.json();
+                    setTickerResults(result["bestMatches"].map((item: { [x: string]: any; }) => ({
+                        value: item['1. symbol'],
+                        label: item['1. symbol'] + ': ' + item['2. name']
+                    })));
+                } else {
+                    console.log('Failed to retrieve ticker info');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+        getSymbol(search);
+    }, [search]);
+
+    function handleSearch(newValue: string) {
+        setSearch(newValue);
+    }
+
+    function handleSelect(symbol) {
+        setTicker(symbol.value);
+        console.log(ticker);
+    }
 
     return (
         <Container mb={16}>
@@ -80,8 +57,10 @@ const SearchBar = () => {
                     name="colors"
                     className="chakra-react-select"
                     classNamePrefix="chakra-react-select"
-                    options={stateOptions}
-                    placeholder="Select a color"
+                    options={tickerResults}
+                    onInputChange={handleSearch}
+                    onChange={handleSelect}
+                    placeholder="Select a ticker"
                     selectedOptionStyle="check"
                     chakraStyles={{
                         dropdownIndicator: () => ({
