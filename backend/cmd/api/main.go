@@ -8,6 +8,7 @@ import (
 	"expvar"
 	"flag"
 	"fmt"
+	goalphavantage "github.com/FruitPunchSamurai1961/Go-AlphaVantage"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 	"log"
@@ -23,9 +24,10 @@ const version = "1.0.0"
 var buildTime string
 
 type config struct {
-	port int
-	env  string
-	db   struct {
+	port   int
+	env    string
+	apiKey string
+	db     struct {
 		dsn          string
 		maxOpenConns int
 		maxIdleConns int
@@ -42,10 +44,11 @@ type config struct {
 	}
 }
 type application struct {
-	config config
-	logger *jsonlog.Logger
-	models data.Models
-	wg     sync.WaitGroup
+	config    config
+	logger    *jsonlog.Logger
+	models    data.Models
+	apiClient *goalphavantage.Client
+	wg        sync.WaitGroup
 }
 
 func main() {
@@ -58,6 +61,7 @@ func main() {
 
 	flag.IntVar(&cfg.port, "port", 4000, "API server port")
 	flag.StringVar(&cfg.env, "env", "development", "Environment (development|staging|production)")
+	flag.StringVar(&cfg.apiKey, "api-key", os.Getenv("AV_API_KEY"), "Alphavantage api key")
 
 	flag.StringVar(&cfg.db.dsn, "db-dsn", os.Getenv("DB_DSN"), "PostgresSQL DSN")
 	flag.IntVar(&cfg.db.maxOpenConns, "db-max-open-conns", 25, "PostgresSQL max open connections")
@@ -109,9 +113,10 @@ func main() {
 	}))
 
 	app := &application{
-		config: cfg,
-		logger: logger,
-		models: data.NewModels(db),
+		config:    cfg,
+		logger:    logger,
+		models:    data.NewModels(db),
+		apiClient: goalphavantage.NewClient(cfg.apiKey),
 	}
 
 	err = app.serve()

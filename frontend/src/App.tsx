@@ -1,41 +1,25 @@
 import React from 'react';
 import './assets/css/App.css';
-import logo from "./assets/images/logo.svg";
-import {BrowserRouter, Route, RouteObject, Routes, useRoutes} from "react-router-dom";
-import LinksData from "./utils/Links"
-import Cookies from "universal-cookie";
-import Login from "./views/Login/Login";
-import Home from "./views/Home/Home";
+import {Provider} from "react-redux";
+import {store} from "./redux/store";
+import {ChakraProvider, createStandaloneToast} from "@chakra-ui/react";
+import {AuthProvider} from "./components/context/AuthContext";
+import {RouterProvider} from "react-router-dom";
+import {router} from "./components/routes/Router";
 
-export const cookies: Cookies = new Cookies();
 
+export const {ToastContainer, toast} = createStandaloneToast()
 function App() {
-
-  // @ts-ignore
-  const routes: RouteObject[] = LinksData.map((data) => (
-      {id: data.name, path: data.path, Component: data.component}
-  ));
-
-  routes.push({
-        id: "HomePage-Form",
-        path: "/",
-        Component: Login
-  })
-
-  return (
-      <BrowserRouter>
-          <Routes>
-              <Route
-                  path="/"
-                  element={<Login />}
-              />
-              <Route
-                  path="/home"
-                  element={<Home />}
-              />
-          </Routes>
-      </BrowserRouter>
-  );
+    return (
+        <Provider store={store}>
+            <ChakraProvider>
+                <AuthProvider>
+                    <RouterProvider router={router}/>
+                    <ToastContainer/>
+                </AuthProvider>
+            </ChakraProvider>
+        </Provider>
+    );
 }
 
 export default App;

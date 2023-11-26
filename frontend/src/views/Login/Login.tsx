@@ -1,205 +1,97 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Stars} from "../../assets/animation/starsAnimation";
-import './Login.css';
-import {useNavigate} from "react-router";
-import {API_BASE_URL, ACCESS_TOKEN, AV_API_KEY} from "../../utils/authConstants";
-import BasicChart from "../../components/charts/BasicChart";
-import {cookies} from "../../App";
+import {
+    Box,
+    Button,
+    Checkbox,
+    Flex,
+    FormControl,
+    FormLabel,
+    Heading,
+    Input,
+    Stack,
+    Text,
+    useColorModeValue,
+} from '@chakra-ui/react'
+import {useLoginMutation} from "../../redux/api/authApi";
+import {Link, useNavigate} from "react-router-dom";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {setEmailState, setPasswordState} from "../../redux/login/loginSlice";
+import {AuthContext} from "../../components/context/AuthContext";
+import {useContext} from "react";
+
 const Login = () => {
-
-    const initVelocity = useRef(1);
-    const transitVelocity = useRef(1.05);
-    const shouldAnimate = useRef(true);
-
-    useEffect(() => {
-        const stars = new Stars({ initVelocity, transitVelocity, shouldAnimate });
-    }, [initVelocity, transitVelocity, shouldAnimate]);
-
-    const stopAnimation = () => {
-        setTimeout(() => {
-            initVelocity.current = 0;
-            transitVelocity.current = 0.99;
-        }, 800);
-        setTimeout(() => {
-            shouldAnimate.current = false;
-        }, 2300);
-    };
-
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [loginStatus, setLoginStatus] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    const [login, {isLoading}] = useLoginMutation();
     const navigate = useNavigate();
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-    });
+    const loginState = useAppSelector((state) => state.login);
+    const dispatch = useAppDispatch();
+    const {handleLogin} = useContext(AuthContext);
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const {name, value} = event.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: any) => {
         event.preventDefault();
-        stopAnimation();
-        setIsLoading(true);
-        try {
-            const response = await fetch(API_BASE_URL + '/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
-
-            if (response.status === 200) {
-                setLoginStatus('Form successful');
-                const responseJson = await response.json();
-                const token = responseJson.accessToken;
-                cookies.set(ACCESS_TOKEN, token, {
-                    secure: true,
-                    maxAge: 2592000
-                });
-                navigate("/home");
-            } else {
-                setLoginStatus('Form failed');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            setLoginStatus('An error occurred during login');
-        } finally {
-            setIsLoading(false);
-        }
-        navigate("/home");
-    };
-
-    const [chart, setChart] = useState({
-        dataA: [] as any[],
-        symbolA: '',
-        dataB: [] as any[],
-        symbolB: ''
-    });
-    const topCompanies = ['AAPL', 'GOOG', 'MSFT', 'TSLA', 'AMZN', 'NVDA', 'KO', 'JPM', 'META', 'PEP', 'COST', 'NFLX'];
-
-    useEffect(() => {
-        const getChart = async (ticker: string) => {
-            try {
-                const response = await fetch('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker + '&interval=5min&apikey=' + AV_API_KEY, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-                if (response.status === 200) {
-                    const result = await response.json();
-                    let nivoData = []
-                    for (let key in result['Time Series (5min)']) {
-                        nivoData.unshift({
-                            x: new Date(key).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
-                            y: result['Time Series (5min)'][key]['4. close']
-                        });
-                    }
-                    const newData: any[] = [];
-                    newData.push({
-                        "id": "stock",
-                        "color": "hsl(195, 70%, 50%)",
-                        "data": nivoData
-                    });
-                    return newData;
-                } else {
-                    console.log('Failed to retrieve stock info');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        };
-        const tickers: string[] = [];
-        const clone = topCompanies.slice();
-        for (let i = 0; i < 2; i++) {
-            const randomIndex = Math.floor(Math.random() * clone.length);
-            const randomElement = clone.splice(randomIndex, 1)[0];
-            tickers.push(randomElement);
-        }
-        getChart(tickers[0]).then(chartData => {
-            if (chartData) {
-                console.log(chartData);
-                setChart(prevChart => ({
-                    ...prevChart,
-                    dataA: chartData,
-                    symbolA: tickers[0]
-                }));
-            }
-        });
-
-        getChart(tickers[1]).then(chartData => {
-            if (chartData) {
-                setChart(prevChart => ({
-                    ...prevChart,
-                    dataB: chartData,
-                    symbolB: tickers[1]
-                }));
-            }
-        });
-
-    }, []);
+        login({
+            email: loginState.email,
+            password: loginState.password
+        }).unwrap()
+            .then((result) => {
+                handleLogin(result.authentication_token.token);
+                navigate("/");
+            })
+            .catch(error => console.error(error));
+    }
 
     return (
-        <div className='container'>
-            <div className="sidebar">
-                <div className="sidebar-body">
-                    <h4> Finance, reimagined. </h4>
-                    <p> A free, lightweight, and easy-to-use platform for all of your stock management needs.</p>
-                    <p>Take advantage of our curated global economics newsfeed, trend-following algorithms, and performance analysis tools to simplify your investment strategy.</p>
-                </div>
-                <h5> Random symbols of the universe </h5>
-                <div className="sidebar-charts">
-                    <BasicChart data={chart.dataA} symbol={chart.symbolA}></BasicChart>
-                </div>
-                <div className="sidebar-charts">
-                    <BasicChart data={chart.dataB} symbol={chart.symbolB}></BasicChart>
-                </div>
-            </div>
-            <div className="main">
-                <div className="title">
-                    <h1>Supernova.</h1>
-                    <h3>A new way to track your portfolio's catastrophic implosion.</h3>
-                </div>
-                <div className="login">
-                    {isLoading ? (
-                        <p>Loading...</p>
-                    ) : (
-                        <form onSubmit={handleSubmit}>
-                            <div className="login-left">
-                                <label>Email:</label>
-                                <input
-                                    type="email1"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    required
-                                />
-                                <label>Password:</label>
-                                <input
-                                    type="password1"
-                                    name="password"
-                                    value={formData.password}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                            <div className="login-right">
-                                <button type="submit" className='login-button'>Login</button>
-                                <button type="reset" className='login-button'>Sign Up</button>
-                            </div>
-                        </form>
-                    )}
-                </div>
-            </div>
-        </div>
+        <Flex
+            minH={'100vh'}
+            align={'center'}
+            justify={'center'}
+            bg={useColorModeValue('gray.50', 'gray.800')}>
+            <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+                <Stack align={'center'}>
+                    <Heading fontSize={'4xl'}>Login</Heading>
+                </Stack>
+                <Box
+                    rounded={'lg'}
+                    bg={useColorModeValue('white', 'gray.700')}
+                    boxShadow={'lg'}
+                    p={8}>
+                    <form onSubmit={handleSubmit}>
+                        <Stack spacing={4}>
+                            <FormControl id="email">
+                                <FormLabel>Email address</FormLabel>
+                                <Input type="email" value={loginState.email}
+                                       onChange={(e) => dispatch(setEmailState({newEmailValue: e.target.value}))}/>
+                            </FormControl>
+                            <FormControl id="password">
+                                <FormLabel>Password</FormLabel>
+                                <Input type="password" value={loginState.password}
+                                       onChange={(e) => dispatch(setPasswordState({newPasswordValue: e.target.value}))}/>
+                            </FormControl>
+                            <Stack spacing={10}>
+                                <Stack
+                                    direction={{base: 'column', sm: 'row'}}
+                                    align={'start'}
+                                    justify={'space-between'}>
+                                    <Checkbox>Remember me</Checkbox>
+                                    <Text color={'blue.400'}><Link to={"/signup"}>New User?</Link></Text>
+                                </Stack>
+                                <Button
+                                    bg={'blue.400'}
+                                    color={'white'}
+                                    _hover={{
+                                        bg: 'blue.500',
+                                    }}
+                                    isLoading={isLoading}
+                                    type='submit'
+                                >
+                                    Sign in
+                                </Button>
+                            </Stack>
+                        </Stack>
+                    </form>
+                </Box>
+            </Stack>
+        </Flex>
     )
 }
 
-export default Login
+export default Login;

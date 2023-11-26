@@ -125,6 +125,19 @@ func (app *application) authenticate(next http.Handler) http.Handler {
 	})
 }
 
+func (app *application) requireAuthenticatedUser(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+		user := app.contextGetUser(r)
+
+		if user.IsAnonymous() {
+			app.authenticationRequiredResponse(w, r)
+			return
+		}
+		next.ServeHTTP(w, r)
+	}
+}
+
 func (app *application) enableCORS(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Add("Vary", "Origin")
@@ -147,7 +160,6 @@ func (app *application) enableCORS(next http.Handler) http.Handler {
 						w.WriteHeader(http.StatusOK)
 						return
 					}
-					break
 				}
 			}
 		}
@@ -178,7 +190,7 @@ func (app *application) logRequest(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		app.logger.PrintInfo("Request Info", map[string]string{
 			"IP":         r.RemoteAddr,
-			"Protocal":   r.Proto,
+			"Protocol":   r.Proto,
 			"Method":     r.Method,
 			"RequestURI": r.URL.RequestURI(),
 		})
