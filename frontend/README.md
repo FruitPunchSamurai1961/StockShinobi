@@ -78,5 +78,23 @@ Team 16 A.K.A. It's My Cat Too
 
 © It's My Cat Too, 2023
 
+## Version Release
+Version 1.0.0 - Initial Release (MM/DD/YYYY)
+
+Features:
+
+Basic stock calculations: Perform calculations for buy/sell transactions, including total cost, profit/loss, and percentage change.
+Multi-currency support: Calculate stock values in different currencies for a global perspective.
+User-friendly interface: Intuitive design for easy input and result visualization.
+Real-time stock data: Fetch current stock prices to provide up-to-date calculations.
+Bug Fixes:
+
+Resolved issue with incorrect currency conversion rates.
+Fixed a calculation bug causing inaccurate profit/loss values.
+Enhancements:
+
+Improved performance for faster calculations.
+Added tooltips for better user guidance.
+Enhanced error handling for a more robust user experience.
 Licensed under the [MIT License]()
 ---
