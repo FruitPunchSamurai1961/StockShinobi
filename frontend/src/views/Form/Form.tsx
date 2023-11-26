@@ -17,8 +17,9 @@ import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {setEmailState, setPasswordState} from "../../redux/login/loginSlice";
 import {AuthContext} from "../../components/context/AuthContext";
 import {useContext} from "react";
+import SearchBar from "../../components/searchbar/SearchBar";
 
-const Login = () => {
+const Form = () => {
     const [login, {isLoading}] = useLoginMutation();
     const navigate = useNavigate();
     const loginState = useAppSelector((state) => state.login);
@@ -54,44 +55,11 @@ const Login = () => {
                     bg={useColorModeValue('white', 'gray.700')}
                     boxShadow={'lg'}
                     p={8}>
-                    <form onSubmit={handleSubmit}>
-                        <Stack spacing={4}>
-                            <FormControl id="email">
-                                <FormLabel>Email address</FormLabel>
-                                <Input type="email" value={loginState.email}
-                                       onChange={(e) => dispatch(setEmailState({newEmailValue: e.target.value}))}/>
-                            </FormControl>
-                            <FormControl id="password">
-                                <FormLabel>Password</FormLabel>
-                                <Input type="password" value={loginState.password}
-                                       onChange={(e) => dispatch(setPasswordState({newPasswordValue: e.target.value}))}/>
-                            </FormControl>
-                            <Stack spacing={10}>
-                                <Stack
-                                    direction={{base: 'column', sm: 'row'}}
-                                    align={'start'}
-                                    justify={'space-between'}>
-                                    <Checkbox>Remember me</Checkbox>
-                                    <Text color={'blue.400'}><Link to={"/signup"}>New User?</Link></Text>
-                                </Stack>
-                                <Button
-                                    bg={'blue.400'}
-                                    color={'white'}
-                                    _hover={{
-                                        bg: 'blue.500',
-                                    }}
-                                    isLoading={isLoading}
-                                    type='submit'
-                                >
-                                    Sign in
-                                </Button>
-                            </Stack>
-                        </Stack>
-                    </form>
+                    <SearchBar />
                 </Box>
             </Stack>
         </Flex>
     )
 }
 
-export default Login;
+export default Form;

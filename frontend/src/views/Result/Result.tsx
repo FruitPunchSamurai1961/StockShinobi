@@ -41,10 +41,10 @@ const mostTradedData: TopStock[] = [
     // Add more most traded as needed
 ];
 
-const Home = () => {
+const Result = () => {
     return (
         <Flex direction={"column"}>
-            <SearchBar />
+            <text>Stock Name</text>
             <HStack>
                 <Box flex={1} pr={4}>
                     <LineChart/>
@@ -63,4 +63,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Result;
