@@ -58,11 +58,8 @@ func (app *application) newsSentimentHandler(w http.ResponseWriter, r *http.Requ
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	err := app.readJSON(w, r, &input)
-	if err != nil {
-		app.badRequestResponse(w, r, err)
-		return
-	}
+	qs := r.URL.Query()
+	input.Tickers = app.readCommaSeperatedValues(qs, "tickers", []string{})
 
 	news, err := app.apiClient.GetNewsSentiment(ctx, &input)
 

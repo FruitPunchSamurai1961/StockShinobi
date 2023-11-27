@@ -2,62 +2,62 @@ import React from "react";
 import LineChart from "../../components/charts/LineChart";
 import {Box, Flex, HStack} from "@chakra-ui/react";
 import News from "../../components/news/News";
-import {TopStock} from "../../ts/types";
+import {SearchBarOption} from "../../ts/types";
 import TopStockList from "../../components/stocks/TopStockList";
 import SearchBar from "../../components/searchbar/SearchBar";
-
-
-// Sample data
-const gainersData: TopStock[] = [
-    {
-        ticker: "AAPL",
-        price: 150.25,
-        change_amount: 5.75,
-        change_percentage: 3.98,
-        volume: 1200000,
-    },
-    // Add more gainers as needed
-];
-
-const losersData: TopStock[] = [
-    {
-        ticker: "GOOGL",
-        price: 2800.10,
-        change_amount: -15.25,
-        change_percentage: -0.54,
-        volume: 800000,
-    },
-    // Add more losers as needed
-];
-
-const mostTradedData: TopStock[] = [
-    {
-        ticker: "MSFT",
-        price: 350.75,
-        change_amount: 2.30,
-        change_percentage: 0.66,
-        volume: 2000000,
-    },
-    // Add more most traded as needed
-];
+import {
+    useGetActiveStocksListQuery,
+    useGetNewsForStocksQuery,
+    useGetTopGainersLosersStockListQuery
+} from "../../redux/api/stockApi";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {setNameState, setSymbolState} from "../../redux/home/homeSlice";
+import {Carousel} from "react-responsive-carousel";
 
 const Home = () => {
+
+    const homeState = useAppSelector((state) => state.home);
+    const dispatch = useAppDispatch();
+
+    const {data: topStocksResponse} = useGetTopGainersLosersStockListQuery();
+    const {data: activeStocksList} = useGetActiveStocksListQuery();
+    const {data: newsFeedResponse} = useGetNewsForStocksQuery({tickers: [homeState.symbol]});
+
+    let options: SearchBarOption[] = [];
+
+    if (activeStocksList != null) {
+        options = activeStocksList.listings.map((stock) => ({value: stock.symbol, label: stock.name}));
+    }
+
+    const handleSearchBarOptionChange = (newValue: SearchBarOption | null) => {
+        if (newValue) {
+            dispatch(setNameState({newNameValue: newValue.label}));
+            dispatch(setSymbolState({newSymbolValue: newValue.value}));
+        }
+    }
+
     return (
         <Flex direction={"column"}>
-            <SearchBar />
+            <SearchBar options={options} isMulti={false} handleSingleSelectOptionChange={handleSearchBarOptionChange}
+                       windowThreshold={10}
+                       name={"stock"} placeholder={"Select a stock"}/>
             <HStack>
                 <Box flex={1} pr={4}>
                     <LineChart/>
                 </Box>
-                <Box flex={1}>
-                    <News/>
+                <Box flex={1} minWidth={0}>
+                    <News feed={newsFeedResponse != null ? newsFeedResponse.news.feed : []}/>
                 </Box>
             </HStack>
-
-            <Box flex={1}>
-                <TopStockList title="Gainers" stocks={gainersData}/>
-                <TopStockList title="Losers" stocks={losersData}/>
-                <TopStockList title="Most Traded" stocks={mostTradedData}/>
+            <Box mt={10} flex={1}>
+                <Carousel showStatus={false} showThumbs={false}>
+                    <TopStockList title="Gainers"
+                                  stocks={topStocksResponse != null ? topStocksResponse.ranking.top_gainers : []}/>
+                    <TopStockList title="Losers"
+                                  stocks={topStocksResponse != null ? topStocksResponse.ranking.top_losers : []}/>
+                    <TopStockList title="Most Traded"
+                                  stocks={topStocksResponse != null ? topStocksResponse.ranking.most_actively_traded : []}/>
+                </Carousel>
             </Box>
         </Flex>
     );
