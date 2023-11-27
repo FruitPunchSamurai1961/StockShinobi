@@ -13,10 +13,19 @@ import {
 import {CloseIcon, HamburgerIcon, MoonIcon, SunIcon,} from '@chakra-ui/icons'
 import {Link as ReactRouterLink} from "react-router-dom";
 import UserStatusNavbarButtons from "./UserStatusNavbarButtons";
+import {useState} from "react";
 
 const Navbar = () => {
     const {isOpen, onToggle} = useDisclosure()
     const {colorMode, toggleColorMode} = useColorMode();
+
+    const [hover, setHover] = useState(false);
+    const handleHover = () => {
+        setHover(true);
+    };
+    const handleLeave = () => {
+        setHover(false);
+    };
 
     return (
         <Box>
@@ -45,7 +54,9 @@ const Navbar = () => {
                     <Text
                         textAlign={useBreakpointValue({base: 'center', md: 'left'})}
                         fontFamily={'heading'}
-                        color={useColorModeValue('gray.800', 'white')}
+                        color={useColorModeValue(hover ? 'pink.300' :'gray.600', hover ? 'pink.300' :'white')}
+                        onMouseEnter={handleHover}
+                        onMouseLeave={handleLeave}
                         fontSize="2xl"
                         fontWeight="bold"
                     >
