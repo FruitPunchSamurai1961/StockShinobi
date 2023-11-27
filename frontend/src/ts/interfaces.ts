@@ -1,4 +1,13 @@
-import {AuthenticationToken, TopStock, User} from "./types";
+import {
+    ActiveStock,
+    AuthenticationToken,
+    Feed,
+    SearchBarOption,
+    StockNewsInfo,
+    TopStock,
+    TopStocksInfo,
+    User
+} from "./types";
 
 export interface SignupState {
     showPassword: boolean,
@@ -23,6 +32,11 @@ export interface ContextState {
     token: string
 }
 
+export interface HomeState {
+    symbol: string
+    name: string
+}
+
 
 export interface LoginResponse {
     authentication_token: AuthenticationToken
@@ -33,7 +47,34 @@ export interface SignupResponse {
     user: User
 }
 
+export interface ActiveListingResponse {
+    listings: ActiveStock[]
+}
+
+export interface TopStocksResponse {
+    ranking: TopStocksInfo
+}
+
+export interface StocksNewsResponse {
+    news: StockNewsInfo
+}
+
+
 export interface TopStockListProps {
     title: string,
     stocks: TopStock[]
+}
+
+export interface SearchBarProps {
+    options: SearchBarOption[]
+    isMulti: boolean
+    name: string
+    placeholder: string
+    windowThreshold: number
+    handleSingleSelectOptionChange?: (value: SearchBarOption | null) => void
+    handleMultiSelectOptionsChange?: (value: SearchBarOption[] | null) => void
+}
+
+export interface NewsProps {
+    feed: Feed[]
 }

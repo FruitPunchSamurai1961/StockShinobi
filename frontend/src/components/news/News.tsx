@@ -1,17 +1,14 @@
 import React from 'react';
-import { Box, Text, Flex, useColorMode } from '@chakra-ui/react';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import the styles
+import {Box, Flex, Link as ChakraLink, Text, useColorMode} from '@chakra-ui/react';
+import {Carousel} from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import {NewsProps} from "../../ts/interfaces";
+import {Link as ReactRouterLink} from "react-router-dom";
 
-const News = () => {
-    const { colorMode } = useColorMode(); // Access the current color mode
-
-    const newsData = [
-        { title: 'News Title 1', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-        { title: 'News Title 2', text: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-        // Add more news items as needed
-    ];
-
+const News: React.FC<NewsProps> = ({
+                                       feed
+                                   }) => {
+    const {colorMode} = useColorMode();
     return (
         <Box>
             <Text fontSize="xl" fontWeight="bold" mb={4}>
@@ -19,7 +16,7 @@ const News = () => {
             </Text>
 
             <Carousel showStatus={false} showThumbs={false}>
-                {newsData.map((news, index) => (
+                {feed.map((news, index) => (
                     <Flex
                         key={index}
                         direction="column"
@@ -31,9 +28,9 @@ const News = () => {
                         p={4}
                     >
                         <Text fontWeight="bold" mb={2}>
-                            {news.title}
+                            <ChakraLink as={ReactRouterLink} to={news.url} color={'blue.400'} target={"_blank"}>{news.title}</ChakraLink>
                         </Text>
-                        <Text>{news.text}</Text>
+                        <Text>{news.summary}</Text>
                     </Flex>
                 ))}
             </Carousel>
