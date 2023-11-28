@@ -88,6 +88,9 @@ export type SearchBarOption = {
     label: string
     value: string
 }
+
+export type LineChartDataPoint = [number, number]
+
 export type DailyAdjustedData = {
     metaData: MetaData
     dailyAdjustedTimeSeries: DailyAdjustedTimeSeries
