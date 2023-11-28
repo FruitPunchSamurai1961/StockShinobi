@@ -7,6 +7,8 @@ import {rtkQueryErrorLogger} from "./middleware";
 import {contextReducer} from "./context/contextSlice";
 import {stockApi} from "./api/stockApi";
 import {homeReducer} from "./home/homeSlice";
+import {lineChartReducer} from "./charts/lineChartSlice";
+import {notesReducer} from "./notes/notesSlice";
 
 export const store = configureStore({
     reducer: {
@@ -15,6 +17,8 @@ export const store = configureStore({
         user: userReducer,
         context: contextReducer,
         home: homeReducer,
+        lineChart: lineChartReducer,
+        notes: notesReducer,
         [authApi.reducerPath]: authApi.reducer,
         [stockApi.reducerPath]: stockApi.reducer,
     },

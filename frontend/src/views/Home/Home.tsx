@@ -2,11 +2,12 @@ import React from "react";
 import LineChart from "../../components/charts/LineChart";
 import {Box, Flex, HStack} from "@chakra-ui/react";
 import News from "../../components/news/News";
-import {SearchBarOption} from "../../ts/types";
+import {LineChartDataPoint, SearchBarOption} from "../../ts/types";
 import TopStockList from "../../components/stocks/TopStockList";
 import SearchBar from "../../components/searchbar/SearchBar";
 import {
     useGetActiveStocksListQuery,
+    useGetDailyAdjustedDataForStockQuery,
     useGetNewsForStocksQuery,
     useGetTopGainersLosersStockListQuery
 } from "../../redux/api/stockApi";
@@ -14,6 +15,7 @@ import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {setNameState, setSymbolState} from "../../redux/home/homeSlice";
 import {Carousel} from "react-responsive-carousel";
 import Notes from "../../components/notes/Notes";
+import {selectionOptions} from "../../ts/enums";
 
 const Home = () => {
 
@@ -23,12 +25,41 @@ const Home = () => {
     const {data: topStocksResponse} = useGetTopGainersLosersStockListQuery();
     const {data: activeStocksList} = useGetActiveStocksListQuery();
     const {data: newsFeedResponse} = useGetNewsForStocksQuery({tickers: [homeState.symbol]});
+    const {data: dailyAdjustedResponse} = useGetDailyAdjustedDataForStockQuery({symbol: homeState.symbol});
 
     let options: SearchBarOption[] = [];
 
     if (activeStocksList != null) {
         options = activeStocksList.listings.map((stock) => ({value: stock.symbol, label: stock.name}));
     }
+
+    let ytdData: LineChartDataPoint[] = [];
+    let sixMonthData: LineChartDataPoint[] = [];
+    let oneMonthData: LineChartDataPoint[] = [];
+    let oneYearData: LineChartDataPoint[] = [];
+    let allData: LineChartDataPoint[] = [];
+
+    if (dailyAdjustedResponse != null) {
+        dailyAdjustedResponse.dailyAdjustedData.dailyAdjustedTimeSeries.adjustedTimeSeriesStockArray.forEach((stock) => {
+            const date = new Date(stock.date).getTime();
+            const dataPoint: LineChartDataPoint = [date, stock.close];
+            allData.push(dataPoint);
+
+            if (selectionOptions.YTD <= date) {
+                ytdData.push(dataPoint);
+            }
+            if (selectionOptions.SIX_MONTHS <= date) {
+                sixMonthData.push(dataPoint);
+            }
+            if (selectionOptions.ONE_MONTH <= date) {
+                oneMonthData.push(dataPoint);
+            }
+            if (selectionOptions.ONE_YEAR <= date) {
+                oneYearData.push(dataPoint);
+            }
+        });
+    }
+
 
     const handleSearchBarOptionChange = (newValue: SearchBarOption | null) => {
         if (newValue) {
@@ -44,14 +75,15 @@ const Home = () => {
                        name={"stock"} placeholder={"Select a stock"}/>
             <HStack>
                 <Box flex={1} pr={4}>
-                    <LineChart/>
+                    <LineChart allData={allData} oneYearData={oneYearData} oneMonthData={oneMonthData}
+                               sixMonthData={sixMonthData} ytdData={ytdData} name={homeState.name}/>
                 </Box>
                 <Box flex={1} minWidth={0}>
                     <News feed={newsFeedResponse != null ? newsFeedResponse.news.feed : []}/>
                 </Box>
             </HStack>
             <Box mx={20} mt={10} minWidth={0}>
-                <Notes name={"notes"} placeholder={"Write notes..."}/>
+                <Notes name={homeState.name} placeholder={"Write notes..."}/>
             </Box>
             <Box mt={10} flex={1}>
                 <Carousel showStatus={false} showThumbs={false}>

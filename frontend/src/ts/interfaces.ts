@@ -1,13 +1,14 @@
 import {
     ActiveStock,
     AuthenticationToken,
-    Feed,
+    Feed, DailyAdjustedData,
     SearchBarOption,
     StockNewsInfo,
     TopStock,
     TopStocksInfo,
-    User
+    User, LineChartDataPoint
 } from "./types";
+import {selectionOptions} from "./enums";
 
 export interface SignupState {
     showPassword: boolean,
@@ -37,6 +38,14 @@ export interface HomeState {
     name: string
 }
 
+export interface LineChartState {
+    selection: selectionOptions
+    data: LineChartDataPoint[]
+}
+
+export interface NotesState {
+    content: string
+}
 
 export interface LoginResponse {
     authentication_token: AuthenticationToken
@@ -58,6 +67,11 @@ export interface TopStocksResponse {
 export interface StocksNewsResponse {
     news: StockNewsInfo
 }
+
+export interface DailyAdjustedResponse {
+    dailyAdjustedData: DailyAdjustedData
+}
+
 
 
 export interface TopStockListProps {
@@ -82,4 +96,13 @@ export interface NewsProps {
 export interface NotesProps {
     name: string
     placeholder: string
+}
+
+export interface LineChartProps {
+    allData: LineChartDataPoint[]
+    oneYearData: LineChartDataPoint[]
+    oneMonthData: LineChartDataPoint[]
+    sixMonthData: LineChartDataPoint[]
+    ytdData: LineChartDataPoint[]
+    name: string
 }

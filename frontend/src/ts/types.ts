@@ -88,3 +88,31 @@ export type SearchBarOption = {
     label: string
     value: string
 }
+
+export type LineChartDataPoint = [number, number]
+
+export type DailyAdjustedData = {
+    metaData: MetaData
+    dailyAdjustedTimeSeries: DailyAdjustedTimeSeries
+}
+
+export type MetaData = {
+    information: string
+    symbol: string
+    lastRefreshed: string
+}
+
+export type DailyAdjustedTimeSeries = {
+    adjustedTimeSeriesStockArray: AdjustedTimeSeriesStock[]
+}
+
+export type AdjustedTimeSeriesStock = {
+    date: string
+    open: number
+    high: number
+    low: number
+    close: number
+    adjustedClose: number
+    volume: number
+    dividendAmount: number
+}
