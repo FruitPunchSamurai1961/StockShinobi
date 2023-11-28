@@ -192,13 +192,13 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 # Frequently Asked Questions(FAQ)-Troubleshooting
 
-## Why can't I access localhost:3000?
+### Why can't I access localhost:3000?
 You probably need -cors-trusted-origins="http://localhost:3000" in program arguments
 
-## How can I improve app performance?
+### How can I improve app performance?
 Make sure you keep window usage to the minimum. Close all other applications to ensure maximum effectivness in loading times.
 
-## A bug or technical issue was found. How can I report it?
+### A bug or technical issue was found. How can I report it?
 Please contact our development team so we can put it our to-do list 
 
 ## Credits
