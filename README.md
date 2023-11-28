@@ -61,10 +61,6 @@ go build
 5. Start the server via `go run ./cmd/api`.
 6. Check out [useful commands](#useful-commands) for more info
 
-## Usage
-
-TODO
-
 ## Useful Commands
 
 ### `go run ./cmd/api`
