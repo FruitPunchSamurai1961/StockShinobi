@@ -14,16 +14,17 @@ Follow these instructions to launch local instance of StockShinobi website.
 
 ### Hardware requirements
 * Server Infrastructure: Cloud Hosting where we are using GCP
-* Database server such as MySQL
+* Database server such as PostgresSQL
 
 ### Frontend/backend Dependencies
 * ReactJS
-* GoLang?
-* Database: MySQL
+* GoLang
+* Database: PostgresSQL
 
 ### Libraries and APIs
 * alphavantage
 * ChakraUI
+* [Client Wrapper](https://pkg.go.dev/github.com/FruitPunchSamurai1961/goalphavantage)
 
 ### Deployment and Hosting
 * Google Cloud Platform
@@ -46,18 +47,19 @@ go build
 ```
 ## Application Installation and Run
 
-1. Clone the repo locally
-2. Run the docker-compose file: `docker compse up`
-3. Run the provided initial db files in `./db/*`. Run in the following order:
+### Install and Database Configuration
+
+1. Run the docker-compose file: `docker compose up`
+2. Run the provided initial db files in `./db/*`. Run in the following order:
     1. `createDB.sql`
     2. `user.sql`
     3. `tokens.sql`
-4. Create a `.env` file containing your postgres url and an API Key for AlphaVantage:
+3. Create a `.env` file containing your postgres url and an API Key for AlphaVantage:
     1. `DB_DSN="postgres://postgres:mysecretpassword@localhost:5432/stockshinobi_db?sslmode=disable"`
    2. `AV_API_KEY=[KEYVALUEHERE]`
-5. Download all go dependencies via `go mod download`
-6. Start the server via `go run ./cmd/api`.
-7. Check out [useful commands](#useful-commands) for more info
+4. Download all go dependencies via `go mod download`
+5. Start the server via `go run ./cmd/api`.
+6. Check out [useful commands](#useful-commands) for more info
 
 ## Usage
 
@@ -127,30 +129,10 @@ internal: Helper Functions
 migrations: SQL Code
 remote: Configuration/Set-up Files
 ```
+### Launch
 
-## Credits
-
-Team 16 A.K.A. It's My Cat Too
-
-## License
-
-© It's My Cat Too, 2023
-
-Licensed under the [MIT License]()
----
-
-
-# StockShinobi Frontend
-
-## Description
-TODO
-
-## Installation
 Command to install dependencies: `npm install --save --legacy-peer-deps`
 
-
-## Usage
-TODO
 
 ## Directory Structure
 ```
@@ -212,6 +194,11 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
+### Troubleshooting
+
+
+# Frequently Asked Questions(FAQ)-Troubleshooting
+
 
 ## Credits
 Team 16 A.K.A. It's My Cat Too
@@ -220,10 +207,10 @@ Team 16 A.K.A. It's My Cat Too
 
 © It's My Cat Too, 2023
 
-## Version Release
+## Release Notes
 Version 1.0.0 - Initial Release (MM/DD/YYYY)
 
-Features:
+## New Features:
 
 Basic stock calculations: Perform calculations for buy/sell transactions, including total cost, profit/loss, and percentage change.
 Multi-currency support: Calculate stock values in different currencies for a global perspective.
@@ -239,4 +226,12 @@ Improved performance for faster calculations.
 Added tooltips for better user guidance.
 Enhanced error handling for a more robust user experience.
 Licensed under the [MIT License]()
+
+## Fixes and Improvements:
+
+## To do: 
+
+## Thanks for using StockShinobi!
+
+We're committed to helping you make fincially responsible choices.
 ---
