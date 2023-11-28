@@ -78,3 +78,8 @@ export interface SearchBarProps {
 export interface NewsProps {
     feed: Feed[]
 }
+
+export interface NotesProps {
+    name: string
+    placeholder: string
+}

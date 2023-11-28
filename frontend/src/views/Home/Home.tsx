@@ -13,6 +13,7 @@ import {
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {setNameState, setSymbolState} from "../../redux/home/homeSlice";
 import {Carousel} from "react-responsive-carousel";
+import Notes from "../../components/notes/Notes";
 
 const Home = () => {
 
@@ -49,6 +50,9 @@ const Home = () => {
                     <News feed={newsFeedResponse != null ? newsFeedResponse.news.feed : []}/>
                 </Box>
             </HStack>
+            <Box mx={20} mt={10} minWidth={0}>
+                <Notes name={"notes"} placeholder={"Write notes..."}/>
+            </Box>
             <Box mt={10} flex={1}>
                 <Carousel showStatus={false} showThumbs={false}>
                     <TopStockList title="Gainers"
