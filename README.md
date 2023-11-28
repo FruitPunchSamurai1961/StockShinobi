@@ -22,6 +22,29 @@ Follow these instructions to launch local instance of StockShinobi website.
 * Database: MySQL
 
 ### Libraries and APIs
+* alphavantage
+* ChakraUI
+
+### Deployment and Hosting
+* Google Cloud Platform
+
+## Download and Build Instructions
+
+### Cloning
+ First open terminal and go to the directory where you want to place the repo.
+* Run
+```shell script
+git clone https://github.com/FruitPunchSamurai1961/StockShinobi.git
+```
+to clone repo into local repo.
+* Open repo on local machine using an IDE preferably Intellij.
+
+### Compilation and Build
+Make sure you are in StockShinobi directory to run
+```shell script
+go build
+```
+## Application Installation and Run
 
 1. Clone the repo locally
 2. Run the docker-compose file: `docker compse up`
