@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"github.com/FruitPunchSamurai1961/goalphavantage"
 	"net/http"
 	"time"
@@ -65,7 +66,7 @@ func (app *application) newsSentimentHandler(w http.ResponseWriter, r *http.Requ
 
 	if err != nil {
 		switch {
-		case goalphavantage.IsAPIError(err):
+		case goalphavantage.IsAPIError(err) || errors.Is(err, goalphavantage.InValidInputError):
 			app.badRequestResponse(w, r, err)
 		default:
 			app.serverErrorResponse(w, r, err)
@@ -74,6 +75,34 @@ func (app *application) newsSentimentHandler(w http.ResponseWriter, r *http.Requ
 	}
 
 	err = app.writeJSON(w, http.StatusOK, envelope{"news": news}, nil)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+	}
+}
+
+func (app *application) dailyAdjustedTimeSeries(w http.ResponseWriter, r *http.Request) {
+	var input goalphavantage.CoreStockSharedInputOptions
+
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	qs := r.URL.Query()
+	input.Symbol = app.readString(qs, "symbol", "")
+	input.Function = "TIME_SERIES_DAILY_ADJUSTED"
+	input.OutputSize = "full"
+
+	dailyAdjustedData, err := app.apiClient.GetTimeSeriesStockData(ctx, &input)
+	if err != nil {
+		switch {
+		case goalphavantage.IsAPIError(err) || errors.Is(err, goalphavantage.InValidInputError):
+			app.badRequestResponse(w, r, err)
+		default:
+			app.serverErrorResponse(w, r, err)
+		}
+		return
+	}
+
+	err = app.writeJSON(w, http.StatusOK, envelope{"dailyAdjustedData": dailyAdjustedData}, nil)
 	if err != nil {
 		app.serverErrorResponse(w, r, err)
 	}
