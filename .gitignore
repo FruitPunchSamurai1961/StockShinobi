@@ -494,3 +494,5 @@ FodyWeavers.xsd
 ./frontend/node_modules
 
 backend/.env
+
+backend/app.yaml

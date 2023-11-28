@@ -3,15 +3,19 @@ package main
 import (
 	"StockShinobi.FruitPunchSamurai1961.net/internal/data"
 	"StockShinobi.FruitPunchSamurai1961.net/internal/jsonlog"
+	"cloud.google.com/go/cloudsqlconn"
 	"context"
 	"database/sql"
 	"expvar"
 	"flag"
 	"fmt"
 	"github.com/FruitPunchSamurai1961/goalphavantage"
+	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/stdlib"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 	"log"
+	"net"
 	"os"
 	"runtime"
 	"strings"
@@ -63,15 +67,6 @@ func main() {
 	flag.StringVar(&cfg.env, "env", "development", "Environment (development|staging|production)")
 	flag.StringVar(&cfg.apiKey, "api-key", os.Getenv("AV_API_KEY"), "Alphavantage api key")
 
-	flag.StringVar(&cfg.db.dsn, "db-dsn", os.Getenv("DB_DSN"), "PostgresSQL DSN")
-	flag.IntVar(&cfg.db.maxOpenConns, "db-max-open-conns", 25, "PostgresSQL max open connections")
-	flag.IntVar(&cfg.db.maxIdleConns, "db-max-idle-conns", 25, "PostgresSQL max idle connections")
-	flag.StringVar(
-		&cfg.db.maxIdleTime,
-		"db-max-idle-time",
-		"15m",
-		"PostgresSQL max connection idle time",
-	)
 	flag.Float64Var(&cfg.limiter.rps, "limiter-rps", 2, "Rate limiter maximum requests per second")
 	flag.IntVar(&cfg.limiter.burst, "limiter-burst", 4, "Rate limiter maximum burst")
 	flag.BoolVar(&cfg.limiter.enabled, "limiter-enabled", true, "Enable rate limiter")
@@ -94,7 +89,7 @@ func main() {
 
 	logger := jsonlog.New(os.Stdout, jsonlog.LevelInfo)
 
-	db, err := openDB(cfg)
+	db, err := connectWithConnector()
 	if err != nil {
 		logger.PrintFatal(err, nil)
 	}
@@ -125,28 +120,44 @@ func main() {
 	}
 }
 
-func openDB(cfg config) (*sql.DB, error) {
-	db, err := sql.Open("postgres", cfg.db.dsn)
+func connectWithConnector() (*sql.DB, error) {
+	mustGetenv := func(k string) string {
+		v := os.Getenv(k)
+		if v == "" {
+			log.Fatalf("Fatal Error in connect_connector.go: %s environment variable not set.\n", k)
+		}
+		return v
+	}
+
+	var (
+		dbUser                 = mustGetenv("DB_USER")
+		dbPwd                  = mustGetenv("DB_PASS")
+		dbName                 = mustGetenv("DB_NAME")
+		instanceConnectionName = mustGetenv("INSTANCE_CONNECTION_NAME")
+		usePrivate             = os.Getenv("PRIVATE_IP")
+	)
+
+	dsn := fmt.Sprintf("user=%s password=%s database=%s", dbUser, dbPwd, dbName)
+	config, err := pgx.ParseConfig(dsn)
+	if err != nil {
+		return nil, err
+	}
+	var opts []cloudsqlconn.Option
+	if usePrivate != "" {
+		opts = append(opts, cloudsqlconn.WithDefaultDialOptions(cloudsqlconn.WithPrivateIP()))
+	}
+	d, err := cloudsqlconn.NewDialer(context.Background(), opts...)
 	if err != nil {
 		return nil, err
 	}
 
-	db.SetMaxOpenConns(cfg.db.maxOpenConns)
-	db.SetMaxIdleConns(cfg.db.maxIdleConns)
-
-	duration, err := time.ParseDuration(cfg.db.maxIdleTime)
-	if err != nil {
-		return nil, err
+	config.DialFunc = func(ctx context.Context, network, instance string) (net.Conn, error) {
+		return d.Dial(ctx, instanceConnectionName)
 	}
-	db.SetConnMaxIdleTime(duration)
-
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-
-	err = db.PingContext(ctx)
+	dbURI := stdlib.RegisterConnConfig(config)
+	dbPool, err := sql.Open("pgx", dbURI)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("sql.Open: %w", err)
 	}
-
-	return db, nil
+	return dbPool, nil
 }
