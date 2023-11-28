@@ -56,7 +56,7 @@ go build
     3. `tokens.sql`
 3. Create a `.env` file containing your postgres url and an API Key for AlphaVantage:
     1. `DB_DSN="postgres://postgres:mysecretpassword@localhost:5432/stockshinobi_db?sslmode=disable"`
-   2. `AV_API_KEY=[KEYVALUEHERE]`
+   2. `AV_API_KEY=[KEYVALUEHERE]` (AlphaVantage Pro Key)
 4. Download all go dependencies via `go mod download`
 5. Start the server via `go run ./cmd/api`.
 6. Check out [useful commands](#useful-commands) for more info
@@ -212,6 +212,13 @@ Team 16 A.K.A. It's My Cat Too
 StockShinobi Version [1.0.0] Release Notes
 
 Release Date [11/28/2023]
+
+## Features:
+* Create and login to a personal account to gain access
+* Search and visualize any stock on the market
+* Personalized news feed for each individual stock
+* View the daily top gainers, biggest losers, and most traded
+* Take notes for any stock and save for later
 
 ## New Features:
 
