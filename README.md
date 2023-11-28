@@ -198,6 +198,9 @@ You probably need -cors-trusted-origins="http://localhost:3000" in program argum
 ### How can I improve app performance?
 Make sure you keep window usage to the minimum. Close all other applications to ensure maximum effectivness in loading times.
 
+### Why can't do my notes disappear when I refresh the page?
+Note saving hasn't been implemented yet so keep in mind when you leave the page it will disappear.
+
 ### A bug or technical issue was found. How can I report it?
 Please contact our development team so we can put it our to-do list 
 
@@ -219,14 +222,14 @@ Release Date [11/28/2023]
 * Search and visualize any stock on the market
 * Personalized news feed for each individual stock
 * View the daily top gainers, biggest losers, and most traded
-* Take notes for any stock and save for later
+* The ability to write notes for a stock
 
 ## New Features:
-
 * Basic stock calculations: Perform calculations for buy/sell transactions, including total cost, profit/loss, and percentage change.
 * Multi-currency support: Calculate stock values in different currencies for a global perspective.
 * User-friendly interface: Intuitive design for easy input and result visualization.
 * Real-time stock data: Fetch current stock prices to provide up-to-date calculations.
+* The ability to toogle Dark Mode!
 
 ## Fixes and Improvements:
 Bug Fixes:
@@ -243,10 +246,11 @@ Licensed under the [MIT License]()
 * Add ability to backtest trading strategies
 * Add ability to see Monthly/Weekly/Intraday stock prices
 * Add ability to get real time quotes
-* Add ability to save notes
+* Add ability to save notes and read them later
+* Send error message if trying to login with an account that doesn't exist
 
 ## Thanks for using StockShinobi!
 
-We're committed to helping you make financially responsible choices.
+We're committed to helping you make financially responsible choices like a Shinobi!
 
 ---
