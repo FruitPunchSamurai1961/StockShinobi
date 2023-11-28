@@ -208,7 +208,8 @@ Team 16 A.K.A. It's My Cat Too
 © It's My Cat Too, 2023
 
 ## Release Notes
-Version 1.0.0 - Initial Release (MM/DD/YYYY)
+StockShinobi Version [1.0.0] Release Notes
+Release Date (11/28/2023)
 
 ## New Features:
 
