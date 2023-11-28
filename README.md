@@ -216,18 +216,17 @@ Basic stock calculations: Perform calculations for buy/sell transactions, includ
 Multi-currency support: Calculate stock values in different currencies for a global perspective.
 User-friendly interface: Intuitive design for easy input and result visualization.
 Real-time stock data: Fetch current stock prices to provide up-to-date calculations.
-Bug Fixes:
 
+## Fixes and Improvements:
+Bug Fixes:
 Resolved issue with incorrect currency conversion rates.
 Fixed a calculation bug causing inaccurate profit/loss values.
-Enhancements:
 
+Enhancements:
 Improved performance for faster calculations.
 Added tooltips for better user guidance.
 Enhanced error handling for a more robust user experience.
 Licensed under the [MIT License]()
-
-## Fixes and Improvements:
 
 ## To do: 
 
