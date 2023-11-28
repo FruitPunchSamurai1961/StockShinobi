@@ -233,4 +233,5 @@ Licensed under the [MIT License]()
 ## Thanks for using StockShinobi!
 
 We're committed to helping you make fincially responsible choices.
+
 ---
