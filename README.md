@@ -61,10 +61,6 @@ go build
 5. Start the server via `go run ./cmd/api`.
 6. Check out [useful commands](#useful-commands) for more info
 
-## Usage
-
-TODO
-
 ## Useful Commands
 
 ### `go run ./cmd/api`
@@ -194,11 +190,16 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-### Troubleshooting
-
-
 # Frequently Asked Questions(FAQ)-Troubleshooting
 
+### Why can't I access localhost:3000?
+You probably need -cors-trusted-origins="http://localhost:3000" in program arguments
+
+### How can I improve app performance?
+Make sure you keep window usage to the minimum. Close all other applications to ensure maximum effectivness in loading times.
+
+### A bug or technical issue was found. How can I report it?
+Please contact our development team so we can put it our to-do list 
 
 ## Credits
 Team 16 A.K.A. It's My Cat Too
@@ -239,6 +240,10 @@ Enhanced error handling for a more robust user experience.
 Licensed under the [MIT License]()
 
 ## To do: 
+* Add ability to backtest trading strategies
+* Add ability to see Monthly/Weekly/Intraday stock prices
+* Add ability to get real time quotes
+* Add ability to save notes
 
 ## Thanks for using StockShinobi!
 
