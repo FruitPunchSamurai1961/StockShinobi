@@ -18,17 +18,19 @@ const TopStockList: React.FC<TopStockListProps> = ({title, stocks}) => {
                         <Th>Change Volume</Th>
                     </Tr>
                 </Thead>
-                <Tbody>
-                    {stocks.map((stock, index) => (
-                        <Tr key={index}>
-                            <Td>{stock.ticker}</Td>
-                            <Td>{stock.price}</Td>
-                            <Td>{stock.change_amount}</Td>
-                            <Td>{stock.change_percentage}</Td>
-                            <Td>{stock.volume}</Td>
-                        </Tr>
-                    ))}
-                </Tbody>
+                {stocks != null ?
+                    <Tbody>
+                        {stocks.map((stock, index) => (
+                            <Tr key={index}>
+                                <Td>{stock.ticker}</Td>
+                                <Td>{stock.price}</Td>
+                                <Td>{stock.change_amount}</Td>
+                                <Td>{stock.change_percentage}</Td>
+                                <Td>{stock.volume}</Td>
+                            </Tr>
+                        ))}
+                    </Tbody>
+                    : null}
             </Table>
         </Box>
     );
