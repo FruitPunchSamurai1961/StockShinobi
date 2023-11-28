@@ -1,10 +1,27 @@
-# StockShinobi Backend
+# Delivery Document for StockShinobi
 
-## Description
+This is our StockShinobi web application. These are insturctions on how to use locally, release notes, and changes to be made.
 
-TODO
+# Install Guide
+Follow these instructions to launch local instance of StockShinobi website.
 
-## Installation
+## Pre-requisites
+### Software requirements
+* [GoLang](https://go.dev/doc/install)
+* Docker
+* Git
+* Git repo file path (https://github.com/FruitPunchSamurai1961/StockShinobi)
+
+### Hardware requirements
+* Server Infrastructure: Cloud Hosting where we are using GCP
+* Database server such as MySQL
+
+### Frontend/backend Dependencies
+* ReactJS
+* GoLang?
+* Database: MySQL
+
+### Libraries and APIs
 
 1. Clone the repo locally
 2. Run the docker-compose file: `docker compse up`
