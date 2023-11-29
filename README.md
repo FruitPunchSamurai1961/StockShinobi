@@ -227,6 +227,20 @@ Release Date [11/28/2023]
 ## Features
 * Search and visualize any stock on the market
 * Create and login to a personal account to gain access
+=======
+
+## To do: 
+* Add Personalized news feed for each individual stock
+* Add top gainers
+* Add biggest losers
+* Add most traded
+* Send error message if trying to login with an account that doesn't exist
+
+StockShinobi Version [1.0.1] Release Notes
+
+Release Date [11/28/2023]
+
+## New Features:
 * Personalized news feed for each individual stock
 * View the daily top gainers, biggest losers, and most traded
 * The ability to write notes for a stock
