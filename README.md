@@ -228,14 +228,18 @@ Team 16 A.K.A. It's My Cat Too
 © It's My Cat Too, 2023
 
 ## Release Notes
-
 StockShinobi Version [1.0.0] Release Notes
+Release Date [11/20/2023]
+
+## Features
+* Search and visualize any stock on the market
+* Create and login to a personal account to gain access
+
+StockShinobi Version [1.0.1] Release Notes
 
 Release Date [11/28/2023]
 
-## Features:
-* Create and login to a personal account to gain access
-* Search and visualize any stock on the market
+## New Features:
 * Personalized news feed for each individual stock
 * View the daily top gainers, biggest losers, and most traded
 * The ability to write notes for a stock
