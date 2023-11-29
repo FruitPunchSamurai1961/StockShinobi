@@ -220,13 +220,6 @@ Note saving hasn't been implemented yet so keep in mind when you leave the page 
 ### A bug or technical issue was found. How can I report it?
 Please contact our development team so we can put it our to-do list 
 
-## Credits
-Team 16 A.K.A. It's My Cat Too
-
-## License
-
-© It's My Cat Too, 2023
-
 # Release Notes
 ## StockShinobi Version [1.0.0] Release Notes
 Release Date [11/20/2023]
@@ -289,5 +282,12 @@ Licensed under the [MIT License]()
 ## Thanks for using StockShinobi!
 
 We're committed to helping you make financially responsible choices like a Shinobi!
+
+## Credits
+Team 16 A.K.A. It's My Cat Too
+
+## License
+
+© It's My Cat Too, 2023
 
 ---
