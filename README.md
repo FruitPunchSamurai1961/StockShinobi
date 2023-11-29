@@ -262,6 +262,13 @@ Added tooltips for better user guidance.
 Enhanced error handling for a more robust user experience.
 Licensed under the [MIT License]()
 
+## Known bugs
+* Few stocks are known to cause an error message to pop up even when data is displayed.
+* This issue was found in multiple stock options.
+* The dark background button is known to not work sometimes.
+* News sometimes not updated
+* Sometimes stock data is not updated.
+  
 ## To do: 
 * Add ability to backtest trading strategies
 * Add ability to see Monthly/Weekly/Intraday stock prices
