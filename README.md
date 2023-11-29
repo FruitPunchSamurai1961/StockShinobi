@@ -227,13 +227,21 @@ Team 16 A.K.A. It's My Cat Too
 
 © It's My Cat Too, 2023
 
-## Release Notes
-StockShinobi Version [1.0.0] Release Notes
+# Release Notes
+## StockShinobi Version [1.0.0] Release Notes
 Release Date [11/20/2023]
 
 ## Features
 * Search and visualize any stock on the market
 * Create and login to a personal account to gain access
+* Basic stock calculations: Perform calculations for buy/sell transactions, including total cost, profit/loss, and percentage change.
+* Multi-currency support: Calculate stock values in different currencies for a global perspective.
+* User-friendly interface: Intuitive design for easy input and result visualization.
+
+## Fixes and Improvements:
+* No fixes due to first version
+## Bugs
+* None
 
 ## To do: 
 * Add Personalized news feed for each individual stock
@@ -242,7 +250,7 @@ Release Date [11/20/2023]
 * Add most traded
 * Send error message if trying to login with an account that doesn't exist
 
-StockShinobi Version [1.0.1] Release Notes
+## StockShinobi Version [1.0.1] Release Notes
 
 Release Date [11/28/2023]
 
@@ -250,11 +258,6 @@ Release Date [11/28/2023]
 * Personalized news feed for each individual stock
 * View the daily top gainers, biggest losers, and most traded
 * The ability to write notes for a stock
-
-## New Features:
-* Basic stock calculations: Perform calculations for buy/sell transactions, including total cost, profit/loss, and percentage change.
-* Multi-currency support: Calculate stock values in different currencies for a global perspective.
-* User-friendly interface: Intuitive design for easy input and result visualization.
 * Real-time stock data: Fetch current stock prices to provide up-to-date calculations.
 * The ability to toogle Dark Mode!
 
