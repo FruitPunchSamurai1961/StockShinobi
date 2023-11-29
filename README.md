@@ -21,6 +21,11 @@ Follow these instructions to launch local instance of StockShinobi website.
 * GoLang
 * Database: PostgresSQL
 
+### Code Editor
+* Intellij
+* Visual code studio
+
+
 ### Libraries and APIs
 * alphavantage
 * ChakraUI
@@ -28,6 +33,9 @@ Follow these instructions to launch local instance of StockShinobi website.
 
 ### Deployment and Hosting
 * Google Cloud Platform
+
+## Dependent Libraries
+* None
 
 ## Download and Build Instructions
 
@@ -190,16 +198,24 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-# Frequently Asked Questions(FAQ)-Troubleshooting
+# Troubleshooting
+### Can't download app/Install app
+* Check if there is storage left on device
+* Check if compatible with current OS
+
+### Freezing while installing
+Restart device and try to install again
 
 ### Why can't I access localhost:3000?
 You probably need -cors-trusted-origins="http://localhost:3000" in program arguments
 
+# Frequently Asked Questions(FAQ)
 ### How can I improve app performance?
-Make sure you keep window usage to the minimum. Close all other applications to ensure maximum effectivness in loading times.
+Make sure you keep window usage to the minimum. Close all other applications to ensure maximum effectivness in loading times. Use task manager or activity moniter for Windows and Mac respectively to check performance.
 
 ### Why can't do my notes disappear when I refresh the page?
 Note saving hasn't been implemented yet so keep in mind when you leave the page it will disappear.
+
 
 ### A bug or technical issue was found. How can I report it?
 Please contact our development team so we can put it our to-do list 
