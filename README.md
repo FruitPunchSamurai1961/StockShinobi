@@ -220,31 +220,18 @@ Note saving hasn't been implemented yet so keep in mind when you leave the page 
 ### A bug or technical issue was found. How can I report it?
 Please contact our development team so we can put it our to-do list 
 
-## Credits
-Team 16 A.K.A. It's My Cat Too
-
-## License
-
-© It's My Cat Too, 2023
-
 ## Release Notes
-StockShinobi Version [1.0.0] Release Notes
-Release Date [11/20/2023]
+StockShinobi Version [1.0.0] Release Notes (https://docs.google.com/document/d/1Is9937pWMB8mSIbJso7neICeTMiqQUpfBAVXRuJs2ys)
+Release Date [11/28/2023]
 
 ## Features
 * Search and visualize any stock on the market
 * Create and login to a personal account to gain access
-
-StockShinobi Version [1.0.1] Release Notes
-
-Release Date [11/28/2023]
-
-## New Features:
 * Personalized news feed for each individual stock
 * View the daily top gainers, biggest losers, and most traded
 * The ability to write notes for a stock
 
-## New Features:
+## Newest Features:
 * Basic stock calculations: Perform calculations for buy/sell transactions, including total cost, profit/loss, and percentage change.
 * Multi-currency support: Calculate stock values in different currencies for a global perspective.
 * User-friendly interface: Intuitive design for easy input and result visualization.
@@ -268,6 +255,7 @@ Licensed under the [MIT License]()
 * The dark background button is known to not work sometimes.
 * News sometimes not updated
 * Sometimes stock data is not updated.
+* Notes do not save
   
 ## To do: 
 * Add ability to backtest trading strategies
@@ -279,5 +267,12 @@ Licensed under the [MIT License]()
 ## Thanks for using StockShinobi!
 
 We're committed to helping you make financially responsible choices like a Shinobi!
+
+## Credits
+Team 16 A.K.A. It's My Cat Too
+
+## License
+
+© It's My Cat Too, 2023
 
 ---
