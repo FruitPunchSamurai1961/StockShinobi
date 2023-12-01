@@ -1,6 +1,4 @@
-# [Stock Shinobi](https://stock-shinobi.web.app) Pages
-
-## Table of Content:
+## Table of Contents:
 
 1. [Overview](overview.md)
 2. [Design Details](design.md)
@@ -8,6 +6,8 @@
 4. [Requirements](requirements.md)
 5. [Tech Stack](tech-stack.md)
 6. [Testing](testing.md)
+
+## Visit our site at: https://stock-shinobi.web.app
 
 ### Made by:
 
