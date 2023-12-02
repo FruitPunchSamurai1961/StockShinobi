@@ -6,7 +6,8 @@
 
 - Create and login to a personal account to gain access
 
-- Basic stock calculations: Perform calculations for buy/sell transactions, including total cost, profit/loss, and percentage change.
+- Basic stock calculations: Perform calculations for buy/sell transactions, including total cost, profit/loss, and
+  percentage change.
 
 - Multi-currency support: Calculate stock values in different currencies for a global perspective.
 
@@ -74,4 +75,7 @@
 
 - Important information to keep you up to date with your investments
 
-We identify and prioritize these requirements because we want to maximize the utility of this web application and give access to as much information as possible. Having a login helps personalize the experiences and allows features such as the notes and even more personalized news. The stock search, visual representation and info are necessary for functionality and help the user to get useful information about stocks.
+We identify and prioritize these requirements because we want to maximize the utility of this web application and give
+access to as much information as possible. Having a login helps personalize the experiences and allows features such as
+the notes and even more personalized news. The stock search, visual representation and info are necessary for
+functionality and help the user to get useful information about stocks.

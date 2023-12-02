@@ -12,7 +12,8 @@
 
     - Focus on backend development, setting up databases using Postgres for User and User Token.
 
-    - Implement backend functionalities for user registration, authentication token generation, and various validation checks (e.g., email validity, password length).
+    - Implement backend functionalities for user registration, authentication token generation, and various validation
+      checks (e.g., email validity, password length).
 
     - Develop helper functions to streamline backend processes.
 

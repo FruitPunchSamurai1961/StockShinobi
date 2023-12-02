@@ -6,14 +6,15 @@ It is an open-source JavaScript library used for building user interfaces for si
 
 Backend: GoLang
 
-Go is an open source language which is used to build secure and scalable systems. It is used as a simpler way of implementing Java and C++. Go is used to implement applications such as cloud and server apps.
-
+Go is an open source language which is used to build secure and scalable systems. It is used as a simpler way of
+implementing Java and C++. Go is used to implement applications such as cloud and server apps.
 
 Database: PostgresSQL
 
 APIs:
 
-- Alpha Advantage - provides realtime and historical financial market data through a set of powerful and developer-friendly data APIs and spreadsheets.
+- Alpha Advantage - provides realtime and historical financial market data through a set of powerful and
+  developer-friendly data APIs and spreadsheets.
 
 - Chakra UI - a simple, modular and accessible component library
 
