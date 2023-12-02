@@ -8,18 +8,18 @@ introduce non-experienced traders to the world of stock trading and this is wher
 Shinobi serves as a one-stop shop for amateur stock traders looking to break into algorithmic trading. Its core purposes
 include:
 
-Stock Analysis: Providing a platform to view real-time stock prices and the performance of said stock during fixed
+**Stock Analysis**: Providing a platform to view real-time stock prices and the performance of said stock during fixed
 periods decided by the user.
 
-Backtesting: Enabling users to select specific stocks and apply various trading strategies to backtest their performance
+**Backtesting**: Enabling users to select specific stocks and apply various trading strategies to backtest their performance
 against historical data. This allows users to evaluate the effectiveness of their strategies.
 
-Profit Prediction: Offering a preliminary estimate of potential gains or losses based on historical trends and
+**Profit Prediction**: Offering a preliminary estimate of potential gains or losses based on historical trends and
 user-defined parameters.
 
-Education: Educating users about trading strategies and market dynamics, thus helping them enhance their trading skills.
+**Education**: Educating users about trading strategies and market dynamics, thus helping them enhance their trading skills.
 
-User Management: Allowing users to create accounts, log in, and log out. This feature facilitates personalized
+**User Management**: Allowing users to create accounts, log in, and log out. This feature facilitates personalized
 experiences and data management.
 
 Our form of project management for this app was to use a hybrid version of the Waterfall methodology. We followed a
