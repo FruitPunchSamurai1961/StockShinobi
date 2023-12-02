@@ -4,11 +4,11 @@
 
 **Login Query:**
 
-![Login Diagram](/docs/assets/images/image1.png "Login Diagram")
+![Login Diagram](./assets/images/image1.png "Login Diagram")
 
 **Home Page Query:**
 
-![Home Page Diagram](/docs/assets/images/image2.png "Home Page")
+![Home Page Diagram](./assets/images/image2.png "Home Page")
 
 ### **Impact of Design Decisions:**<a id="impact-of-design-decisions"></a>
 
