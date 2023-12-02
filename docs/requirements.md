@@ -23,7 +23,9 @@
 
 **Non-Functional Requirements:**
 
-- The ability to toggle Dark Mode!
+- Stock data should be updated in real-time
+
+- News articles pulled to display should not be any older than 2 weeks
 
 - The processing of each request should be done within 10 seconds
 
