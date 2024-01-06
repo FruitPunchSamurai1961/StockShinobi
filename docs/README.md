@@ -7,8 +7,6 @@
 5. [Tech Stack](tech-stack.md)
 6. [Testing](testing.md)
 
-## Visit our site at: [https://stock-shinobi.web.app](https://stock-shinobi.web.app)
-
 ### Made by:
 
 <a href="https://github.com/FruitPunchSamurai1961">
